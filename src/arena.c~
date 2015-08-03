@@ -1,0 +1,39 @@
+/*F******************************************************************
+ * 
+ * 
+ * PURPOSE : 
+ *
+ * RETURN :  
+ *
+ * NOTES :   
+ *F*/
+void update_arena(void) {
+
+}
+
+/*F******************************************************************
+ * update_snake(void)
+ * 
+ * PURPOSE : 
+ *
+ * RETURN :  
+ *
+ * NOTES :   
+ *F*/
+void update_snake(void) {
+
+}
+
+/*F******************************************************************
+ * is_snake_dead(void)
+ * 
+ * PURPOSE : 
+ *
+ * RETURN :  
+ *
+ * NOTES :   
+ *F*/
+void is_snake_dead(void) {
+
+
+}
