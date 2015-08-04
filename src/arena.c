@@ -8,6 +8,13 @@
 bool is_init  = true;
 unsigned int snake_length;
 
+struct Snake_Tail{
+  int *x;
+  int *y;
+} tail;
+
+unsigned int snake_length;
+
 /*F******************************************************************
  * update_snake(void)
  * 
@@ -38,7 +45,9 @@ void update_snake(void) {
     snake_x++;
     break;
   }
-  
+
+  tail.x[3]  = snake_x;
+  tail.y[3]  = snake_y;
 }
 
 /*F******************************************************************
@@ -54,9 +63,12 @@ void update_snake(void) {
  *F*/
 inline void init_snake() {
 
-    snake_x  = rand() % 20;
-    snake_y  = rand() % 20;
-    snake_length  = 4;
+  snake_length  = 4;
+  tail.x        = calloc(sizeof(int), snake_length);
+  tail.y        = calloc(sizeof(int), snake_length);
+  snake_x       = rand() % 20;
+  snake_y       = rand() % 20;
+  snake_length  = 4;
 }
 
 /*F******************************************************************
@@ -72,6 +84,8 @@ inline void init_snake() {
 inline bool is_snake_dead(void) {
 
   if(snake_x > 20 || snake_y > 20) {
+    free(tail.x);
+    free(tail.y);
     return true;
   }
   return false;

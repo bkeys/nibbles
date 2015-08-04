@@ -8,8 +8,8 @@ OBJFILES  = $(OBJDIR)main.o $(OBJDIR)glut_func.o $(OBJDIR)arena.o
 
 $(PRJ) : $(OBJFILES)
 	$(CC) -o bin/$(PRJ) $(OBJFILES) $(GLLIBS) $(CFLAGS)
-	tar -cf ../$(PRJ).tar bin/*.dll $(SRCDIR)*.h $(SRCDIR)*.c obj/ Makefile LICENSE
-	zip -r -0 ../$(PRJ).zip  bin/*.dll $(SRCDIR)*.h $(SRCDIR)*.c obj/ Makefile LICENSE
+#	tar -cf ../$(PRJ).tar bin/*.dll $(SRCDIR)*.h $(SRCDIR)*.c obj/ Makefile LICENSE
+#	zip -r -0 ../$(PRJ).zip  bin/*.dll $(SRCDIR)*.h $(SRCDIR)*.c obj/ Makefile LICENSE
 
 $(OBJDIR)main.o: $(SRCDIR)main.c $(SRCDIR)arena.h $(SRCDIR)glut_func.h
 	$(CC) -o $(OBJDIR)main.o -c $(SRCDIR)main.c $(GLLIBS) $(CFLAGS)
