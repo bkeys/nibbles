@@ -1,56 +1,137 @@
 #include "arena.h"
 
-/*F******************************************************************
- * update_arena(void)
- * 
- * PURPOSE : 
- *
- * RETURN :  
- *
- * NOTES :   
- *F*/
-void update_arena(void) {
+#define SNAKE_UP     1
+#define SNAKE_DOWN   2
+#define SNAKE_LEFT   3
+#define SNAKE_RIGHT  4
 
-  
-  glColor3f(0.1, 0.2, 0.3);
-
-  for(int x  = 0; x < 20; ++x) {
-    for(int z  = 0; z < 20; ++z) {
-      glBegin(GL_TRIANGLES);
-      glVertex3f(x - 10      , -2, (-5 + z) - 20); //--
-      glVertex3f((x + 1) - 10, -2, (-5 + z) - 20); //+-
-      glVertex3f(x - 10      , -2, (-4 + z) - 20); //-+
-      glEnd();
-    }
-  }
-  glRotatef(30, 0, 1, 0);
-}
+bool is_init  = true;
+unsigned int snake_length;
 
 /*F******************************************************************
  * update_snake(void)
  * 
- * PURPOSE : 
+ * PURPOSE : enables the snake to move according to the direction it
+ *           is currently facing
  *
- * RETURN :  
+ * RETURN :  void
  *
  * NOTES :   
  *F*/
 void update_snake(void) {
 
+  switch(snake_dir) {
+
+  case SNAKE_UP:
+    snake_y++;
+    break;
+
+  case SNAKE_DOWN:
+    snake_y--;
+    break;
+
+  case SNAKE_LEFT:
+    snake_x--;
+    break;
+
+  case SNAKE_RIGHT:
+    snake_x++;
+    break;
+  }
   
+}
+
+/*F******************************************************************
+ * init_snake(void)
+ * 
+ * PURPOSE : places the snake randomly in the arena and sets it's length
+ *
+ * RETURN :  void
+ *
+ * NOTES :   this might not need to be a function at all, it only
+ *           gets called once, check at the end of the project, if
+ *           it only gets called once it probably should not be a function
+ *F*/
+inline void init_snake() {
+
+    snake_x  = rand() % 20;
+    snake_y  = rand() % 20;
+    snake_length  = 4;
 }
 
 /*F******************************************************************
  * is_snake_dead(void)
  * 
- * PURPOSE : 
+ * PURPOSE : inline function that checks if the snake is dead
  *
- * RETURN :  
+ * RETURN :  bool, true if dead, false if not
+ *
+ * NOTES :   needs to be expanded later to ensure the snake can collide
+ *           with itself
+ *F*/
+inline bool is_snake_dead(void) {
+
+  if(snake_x > 20 || snake_y > 20) {
+    return true;
+  }
+  return false;
+}
+
+/*F******************************************************************
+ * draw_arena(void)
+ * 
+ * PURPOSE : draws the arena to the buffer
+ *
+ * RETURN :  void
  *
  * NOTES :   
  *F*/
-void is_snake_dead(void) {
+void draw_arena() {
 
-  
+  glBegin(GL_QUADS);
+  for(int x  = 0; x < 20; ++x) {
+    for(int z  = 0; z < 20;++z) {
 
+      glColor4f(.1, .2, .3, .3);
+
+      //drawing the snake's location
+      if(snake_x == x && snake_y ==z) {
+	glColor3f(0, 0, 255);
+      }
+
+      glVertex3f(x - 9,
+		 z - 6,
+		 -z - 14); //+-
+      glVertex3f(x - 10,
+		 z - 6,
+		 -z - 14); //--
+      glVertex3f(x - 10,
+		 (z + 1) - 6,
+		 -z - 15); //++
+      glVertex3f(x - 9,
+		 (z + 1) - 6,
+		 -z - 15); //-+
+    }
+  }
+  glEnd();
+}
+
+/*F******************************************************************
+ * update_arena(void)
+ * 
+ * PURPOSE : delegates the work of the arena
+ *
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
+void update_arena(void) {
+
+  if(is_init || is_snake_dead()) {
+    init_snake();
+    is_init  = false;
+  }
+
+  update_snake();
+  draw_arena();
 }

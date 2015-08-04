@@ -23,12 +23,10 @@
 #ifndef ARENA_H_INCLUDED
 #define ARENA_H_INCLUDED
 
-unsigned int arena[20][20];
-unsigned int snake_dir;
-extern unsigned int screen_dim;
+extern unsigned int snake_x;
+extern unsigned int snake_y;
+extern unsigned int snake_dir;
 
 void update_arena(void);
-void update_snake(void);
-void is_snake_dead(void);
 
 #endif //ARENA_H_INCLUDED

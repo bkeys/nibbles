@@ -7,6 +7,7 @@
 #endif
 
 #include <GL/freeglut.h>
+#include <time.h>
 #include "glut_func.h"
 
 /*F******************************************************************
@@ -20,6 +21,8 @@
  *F*/
 int main(int argc, char **argv) {
 
+  srand(time(NULL));
+
   /*---- initialization -------------------------------------------------*/
   glutInit(&argc, argv);
   glutCreateWindow("3D Snake");
@@ -29,10 +32,15 @@ int main(int argc, char **argv) {
   glutInitDisplayMode(GLUT_DOUBLE);
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClearDepth(1.0f);
+  /*---------------------------------------------------------------------*/
+
+  /*---- initialization -------------------------------------------------*/
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LEQUAL);
   glShadeModel(GL_SMOOTH);
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   /*---------------------------------------------------------------------*/
 
   /*---- glut handling --------------------------------------------------*/
@@ -40,6 +48,8 @@ int main(int argc, char **argv) {
   glutKeyboardFunc(keyboard);
   glutIdleFunc(idle);
   glutReshapeFunc(reshape);
+  glutSpecialFunc(special);
+  glutTimerFunc(0,timer,0);
   glutMainLoop();
   /*---------------------------------------------------------------------*/
 

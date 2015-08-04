@@ -26,11 +26,16 @@
 #define GLUT_FUNC_H_INCLUDED
 
 extern unsigned int screen_dim;
+unsigned int snake_x;
+unsigned int snake_y;
+unsigned int snake_dir;
 
 void idle(void);
 void display(void);
 void keyboard(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void reshape(GLsizei width, GLsizei height);
+void special(int key, int x, int y);
+void timer(int value);
 
 #endif //GLUT_FUNC_H_INCLUDED
