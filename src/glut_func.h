@@ -15,15 +15,23 @@
  * START DATE :    07/31/2015
  *
  *H*/
+#ifndef GLUT_FUNC_H_INCLUDED
+#define GLUT_FUNC_H_INCLUDED
+
+#ifdef __MINGW32__
+#include <windows.h>
+#endif
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 #include <GL/freeglut.h>
 #include <GL/glu.h>
 #include <stdio.h>
 #include <stdbool.h>
 
 #include "arena.h"
-
-#ifndef GLUT_FUNC_H_INCLUDED
-#define GLUT_FUNC_H_INCLUDED
 
 extern unsigned int screen_dim;
 unsigned int snake_x;

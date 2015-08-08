@@ -8,13 +8,6 @@
 bool is_init  = true;
 unsigned int snake_length;
 
-struct Snake_Tail{
-  int *x;
-  int *y;
-} tail;
-
-unsigned int snake_length;
-
 /*F******************************************************************
  * update_snake(void)
  * 
@@ -45,9 +38,6 @@ void update_snake(void) {
     snake_x++;
     break;
   }
-
-  tail.x[3]  = snake_x;
-  tail.y[3]  = snake_y;
 }
 
 /*F******************************************************************
@@ -60,15 +50,16 @@ void update_snake(void) {
  * NOTES :   this might not need to be a function at all, it only
  *           gets called once, check at the end of the project, if
  *           it only gets called once it probably should not be a function
+ *           We also might want to check to see if the snake is on the edge
+ *           or is close to the edge and facing the edge, the #defines
+ *           should come in handy for this purpose
  *F*/
 inline void init_snake() {
 
   snake_length  = 4;
-  tail.x        = calloc(sizeof(int), snake_length);
-  tail.y        = calloc(sizeof(int), snake_length);
   snake_x       = rand() % 20;
   snake_y       = rand() % 20;
-  snake_length  = 4;
+  snake_dir     = 1 + (rand() % 4);
 }
 
 /*F******************************************************************
@@ -84,8 +75,6 @@ inline void init_snake() {
 inline bool is_snake_dead(void) {
 
   if(snake_x > 20 || snake_y > 20) {
-    free(tail.x);
-    free(tail.y);
     return true;
   }
   return false;
@@ -128,6 +117,9 @@ void draw_arena() {
     }
   }
   glEnd();
+
+  glFlush();
+  glFinish();
 }
 
 /*F******************************************************************

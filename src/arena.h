@@ -15,13 +15,21 @@
  * START DATE :    07/31/2015
  *
  *H*/
-#include <GL/freeglut.h>
-#include <GL/glu.h>
-#include <stdio.h>
-#include <stdbool.h>
-
 #ifndef ARENA_H_INCLUDED
 #define ARENA_H_INCLUDED
+
+#ifdef __MINGW32__
+#include <windows.h>
+#endif
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
+#include <GL/gl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 extern unsigned int snake_x;
 extern unsigned int snake_y;

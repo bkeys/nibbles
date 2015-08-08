@@ -13,13 +13,12 @@
  *F*/
 void idle(void) {
   
-  glClearColor (255, 255, 255, 1);
-  glClear(GL_COLOR_BUFFER_BIT);
-
   if(glGetError() != GL_NO_ERROR) {
     glutLeaveMainLoop();
   }
 
+  glFlush();
+  glFinish();
   return;
 }
 
@@ -64,6 +63,8 @@ void reshape(GLsizei width, GLsizei height) {
   glLoadIdentity();
 
   gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+  glFlush();
+  glFinish();
 }
 
 /*F******************************************************************
@@ -85,6 +86,8 @@ void keyboard(unsigned char key, int x, int y) {
     break;
 
   }
+  glFlush();
+  glFinish();
   glutPostRedisplay();
 }
 
@@ -124,12 +127,11 @@ void special(int key, int x, int y) {
  *
  * RETURN :  void
  *
- * NOTES :   does not seem to work
+ * NOTES :   
  *F*/
 void timer(int value) {
   
-  GLint gFramesPerSecond = 0;
-  const int desired_fps  = 60;
+  const int desired_fps  = 20;
   static GLint frames = 0;         // frames averaged over 1000mS
   static GLuint clock;             // [milliSeconds]
   static GLuint next_clock = 0;     // [milliSeconds]
@@ -143,10 +145,10 @@ void timer(int value) {
     return;
   }
 
-  gFramesPerSecond  = frames/1; // store the averaged number of frames per second
-
   next_clock  = clock+1000; // 1000mS=1S in the future
   frames  = 0;
 
+  glFlush();
+  glFinish();
   glutPostRedisplay();
 }
