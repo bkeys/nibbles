@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "arena.h"
 
 #define SNAKE_UP     1
@@ -7,6 +9,8 @@
 
 bool is_init  = true;
 unsigned int snake_length;
+
+node *cursor;
 
 /*F******************************************************************
  * update_snake(void)
@@ -23,19 +27,19 @@ void update_snake(void) {
   switch(snake_dir) {
 
   case SNAKE_UP:
-    snake_y++;
+    snake.y++;
     break;
 
   case SNAKE_DOWN:
-    snake_y--;
+    snake.y--;
     break;
 
   case SNAKE_LEFT:
-    snake_x--;
+    snake.x--;
     break;
 
   case SNAKE_RIGHT:
-    snake_x++;
+    snake.x++;
     break;
   }
 }
@@ -57,9 +61,35 @@ void update_snake(void) {
 inline void init_snake() {
 
   snake_length  = 4;
-  snake_x       = rand() % 20;
-  snake_y       = rand() % 20;
   snake_dir     = 1 + (rand() % 4);
+  snake.x       = rand() % 20;
+  snake.y       = rand() % 20;
+  cursor        = &snake;
+
+  for(int i  = 0; i < snake_length; ++i) {
+
+    cursor->next = (node*)calloc(sizeof(node), 1);
+
+    //    cursor->next->prev = cursor;
+
+    // Increment cursor
+    cursor = cursor->next;
+
+    // Assign data in linked list
+    //    cursor->x = (cursor->prev->x) + 1;
+    //    cursor->y = (cursor->prev->y) + 1;
+
+
+  
+  }
+
+  cursor->next  = NULL;
+    cursor  = &snake;
+
+  while(cursor->next) {
+    fprintf(stdout, "This node has:\n\tX: %d\n\tY: %d\n", cursor->x, cursor->y);
+	cursor = cursor->next;
+  }
 }
 
 /*F******************************************************************
@@ -74,7 +104,7 @@ inline void init_snake() {
  *F*/
 inline bool is_snake_dead(void) {
 
-  if(snake_x > 20 || snake_y > 20) {
+  if(snake.x > 20 || snake.x < 0 || snake.y > 20 || snake.y < 0) {
     return true;
   }
   return false;
@@ -98,10 +128,17 @@ void draw_arena() {
       glColor4f(.1, .2, .3, .3);
 
       //drawing the snake's location
-      if(snake_x == x && snake_y ==z) {
+      if(snake.x == x && snake.y == z) {
 	glColor3f(0, 0, 255);
       }
 
+      while(cursor->next) {
+	if(cursor->x == x && cursor->y == z) {
+	  glColor3f(0, 0, 255);
+	}
+	cursor  = cursor->next;
+      }
+      
       glVertex3f(x - 9,
 		 z - 6,
 		 -z - 14); //+-

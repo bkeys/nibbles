@@ -31,9 +31,16 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-extern unsigned int snake_x;
-extern unsigned int snake_y;
-extern unsigned int snake_dir;
+typedef struct {
+  int x;
+  int y;
+
+  struct node *next;
+} node;
+
+node snake;
+
+unsigned int snake_dir;
 
 void update_arena(void);
 
