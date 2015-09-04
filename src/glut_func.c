@@ -80,6 +80,38 @@ void keyboard(unsigned char key, int x, int y) {
 
   switch(key) {
 
+  case 'W':
+  case 'w':
+    if(snake_dir == 2) {
+      return;
+    }
+    snake_dir  = 1;
+    break;
+
+  case 'S':
+  case 's':
+    if(snake_dir == 1) {
+      return;
+    }
+    snake_dir  = 2;
+    break;
+
+  case 'A':
+  case 'a':
+    if(snake_dir == 4) {
+      return;
+    }
+    snake_dir  = 3;
+    break;
+
+  case 'D':
+  case 'd':
+    if(snake_dir == 3) {
+      return;
+    }
+    snake_dir  = 4;
+    break;
+
   case 'Q':
   case 'q':
     glutLeaveMainLoop();
