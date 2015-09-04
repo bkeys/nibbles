@@ -14,21 +14,31 @@ typedef struct {
 
 bool is_init  = true;
 unsigned int snake_length;
+unsigned int obstacle_amount;
 
 unsigned int fruit_x;
 unsigned int fruit_y;
 point *snake_body;
+point *obstacle_points;
 
 /*F******************************************************************
+ * init_obstacle(void)
  * 
- * 
- * PURPOSE : 
+ * PURPOSE : creates obstacles in the map
  *           
- *
  * RETURN :  void
  *
  * NOTES :   
  *F*/
+void init_obstacle(void) {
+
+  obstacle_amount  = rand() % 5;
+  obstacle_points  = (point*)calloc(obstacle_amount, sizeof(point));
+  for(int i  = 0; i < obstacle_amount; ++i) {
+    obstacle_points[i].x  =  rand() % 20;
+    obstacle_points[i].y  =  rand() % 20;
+  }
+}
 
 /*F******************************************************************
  * update_snake(void)
@@ -42,9 +52,9 @@ point *snake_body;
  *F*/
 void update_snake(void) {
 
-    for(int i  = snake_length; i > 0; --i) {
-      snake_body[i]  = snake_body[i - 1];
-    }
+  for(int i  = snake_length; i > 0; --i) {
+    snake_body[i]  = snake_body[i - 1];
+  }
   switch(snake_dir) {
 
   case SNAKE_UP:
@@ -135,15 +145,30 @@ inline void init_snake() {
  *F*/
 inline bool is_snake_dead(void) {
 
-  if(snake_body[0].x > 20 || snake_body[0].x < 0 || snake_body[0].y > 20 || snake_body[0].y < 0) {
+  bool is_dead  = false;
+  
+  for(int i  = 0; i < obstacle_amount; ++i) {
+    if(obstacle_points[i].x == snake_body[0].x && obstacle_points[i].y == snake_body[0].y) {
+      is_dead  = true;
+    }
+  }
 
+
+  if(snake_body[0].x > 20 || snake_body[0].x < 0 || snake_body[0].y > 20 || snake_body[0].y < 0) {
+    is_dead  = true;
+  }
+
+  if(is_dead) {
     if(snake_body != NULL) {
       free(snake_body);
     }
-    return true;
+    if(obstacle_points != NULL) {
+      free(obstacle_points);
+    }
   }
-  return false;
+  return is_dead;
 }
+
 
 /*F******************************************************************
  * draw_arena(void)
@@ -166,6 +191,12 @@ void draw_arena() {
       for(int i  = 0; i < snake_length; ++i) {
 	if(snake_body[i].x == x && snake_body[i].y == z) {
 	  glColor3f(0, 0, 255);
+	}
+      }
+
+      for(int i  = 0; i < obstacle_amount; ++i) {
+	if(obstacle_points[i].x == x && obstacle_points[i].y == z) {
+	  glColor3f(0, 255, 0);
 	}
       }
 
@@ -206,6 +237,7 @@ void update_arena(void) {
 
   if(is_init || is_snake_dead()) {
     init_snake();
+    init_obstacle();
     is_init  = false;
   }
 

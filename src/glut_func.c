@@ -84,7 +84,6 @@ void keyboard(unsigned char key, int x, int y) {
   case 'q':
     glutLeaveMainLoop();
     break;
-
   }
   glFlush();
   glFinish();
@@ -102,18 +101,31 @@ void keyboard(unsigned char key, int x, int y) {
  * NOTES :   
  *F*/
 void special(int key, int x, int y) {
+
   switch (key) {
 
   case GLUT_KEY_UP:
+    if(snake_dir == 2) {
+      return;
+    }
     snake_dir  = 1;
     break;
   case GLUT_KEY_DOWN:
+    if(snake_dir == 1) {
+      return;
+    }
     snake_dir  = 2;
     break;
   case GLUT_KEY_LEFT:
+    if(snake_dir == 4) {
+      return;
+    }
     snake_dir  = 3;
     break;
   case GLUT_KEY_RIGHT:
+    if(snake_dir == 3) {
+      return;
+    }
     snake_dir  = 4;
     break;
   }
