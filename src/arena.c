@@ -7,10 +7,28 @@
 #define SNAKE_LEFT   3
 #define SNAKE_RIGHT  4
 
+typedef struct {
+  int x;
+  int y;
+} point;
+
 bool is_init  = true;
 unsigned int snake_length;
 
-node *cursor;
+unsigned int fruit_x;
+unsigned int fruit_y;
+point *snake_body;
+
+/*F******************************************************************
+ * 
+ * 
+ * PURPOSE : 
+ *           
+ *
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
 
 /*F******************************************************************
  * update_snake(void)
@@ -24,24 +42,60 @@ node *cursor;
  *F*/
 void update_snake(void) {
 
+    for(int i  = snake_length; i > 0; --i) {
+      snake_body[i]  = snake_body[i - 1];
+    }
   switch(snake_dir) {
 
   case SNAKE_UP:
-    snake.y++;
+    snake_body[0].y++;
     break;
 
   case SNAKE_DOWN:
-    snake.y--;
+    snake_body[0].y--;
     break;
 
   case SNAKE_LEFT:
-    snake.x--;
+    snake_body[0].x--;
     break;
 
   case SNAKE_RIGHT:
-    snake.x++;
+    snake_body[0].x++;
     break;
   }
+}
+
+/*F******************************************************************
+ * is_snake_eating(void)
+ * 
+ * PURPOSE : Determines collision between the snake and the fruit
+ *           
+ *
+ * RETURN :  bool
+ *
+ * NOTES :   
+ *F*/
+inline bool is_snake_eating(void) {
+
+  if(snake_body[0].x == fruit_x && snake_body[0].y == fruit_y) {
+    return true;
+  }
+  return false;  
+}
+
+/*F******************************************************************
+ * init_fruit(void)
+ * 
+ * PURPOSE : Places the fruit on the map after it has been eaten, or
+ *           the player has died
+ *
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
+inline void init_fruit(void) {
+  fruit_x  = rand() % 20;
+  fruit_y  = rand() % 20;
 }
 
 /*F******************************************************************
@@ -60,36 +114,13 @@ void update_snake(void) {
  *F*/
 inline void init_snake() {
 
-  snake_length  = 4;
-  snake_dir     = 1 + (rand() % 4);
-  snake.x       = rand() % 20;
-  snake.y       = rand() % 20;
-  cursor        = &snake;
+  snake_length     = 4;
+  snake_body       = (point*)calloc(sizeof(point), snake_length);
+  snake_dir        = 1 + (rand() % 4);
+  snake_body[0].x  = rand() % 20;
+  snake_body[0].y  = rand() % 20;
 
-  for(int i  = 0; i < snake_length; ++i) {
-
-    cursor->next = (node*)calloc(sizeof(node), 1);
-
-    //    cursor->next->prev = cursor;
-
-    // Increment cursor
-    cursor = cursor->next;
-
-    // Assign data in linked list
-    //    cursor->x = (cursor->prev->x) + 1;
-    //    cursor->y = (cursor->prev->y) + 1;
-
-
-  
-  }
-
-  cursor->next  = NULL;
-    cursor  = &snake;
-
-  while(cursor->next) {
-    fprintf(stdout, "This node has:\n\tX: %d\n\tY: %d\n", cursor->x, cursor->y);
-	cursor = cursor->next;
-  }
+  init_fruit();
 }
 
 /*F******************************************************************
@@ -104,7 +135,11 @@ inline void init_snake() {
  *F*/
 inline bool is_snake_dead(void) {
 
-  if(snake.x > 20 || snake.x < 0 || snake.y > 20 || snake.y < 0) {
+  if(snake_body[0].x > 20 || snake_body[0].x < 0 || snake_body[0].y > 20 || snake_body[0].y < 0) {
+
+    if(snake_body != NULL) {
+      free(snake_body);
+    }
     return true;
   }
   return false;
@@ -128,17 +163,16 @@ void draw_arena() {
       glColor4f(.1, .2, .3, .3);
 
       //drawing the snake's location
-      if(snake.x == x && snake.y == z) {
-	glColor3f(0, 0, 255);
-      }
-
-      while(cursor->next) {
-	if(cursor->x == x && cursor->y == z) {
+      for(int i  = 0; i < snake_length; ++i) {
+	if(snake_body[i].x == x && snake_body[i].y == z) {
 	  glColor3f(0, 0, 255);
 	}
-	cursor  = cursor->next;
       }
-      
+
+      if(fruit_x == x && fruit_y == z) {
+	glColor3f(255, 0, 0);
+      }
+
       glVertex3f(x - 9,
 		 z - 6,
 		 -z - 14); //+-
@@ -173,6 +207,12 @@ void update_arena(void) {
   if(is_init || is_snake_dead()) {
     init_snake();
     is_init  = false;
+  }
+
+  if(is_snake_eating()) {
+    init_fruit();
+    snake_length += 2;
+    snake_body    = (point*)realloc(snake_body, snake_length * sizeof(point));
   }
 
   update_snake();

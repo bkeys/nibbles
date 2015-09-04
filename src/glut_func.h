@@ -33,7 +33,6 @@
 
 #include "arena.h"
 
-extern node snake;
 extern unsigned int screen_dim;
 extern unsigned int snake_dir;
 

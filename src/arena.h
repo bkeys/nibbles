@@ -31,15 +31,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct {
-  int x;
-  int y;
-
-  struct node *next;
-} node;
-
-node snake;
-
+unsigned int snake_x;
+unsigned int snake_y;
 unsigned int snake_dir;
 
 void update_arena(void);
