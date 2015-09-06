@@ -153,14 +153,13 @@ inline bool is_snake_dead(void) {
     }
   }
 
-
   for(int i  = 1; i < snake_length; ++i) {
     if(snake_body[i].x == snake_body[0].x && snake_body[i].y == snake_body[0].y) {
       is_dead  = true;
     }
   }
 
-  if(snake_body[0].x > 20 || snake_body[0].x < 0 || snake_body[0].y > 20 || snake_body[0].y < 0) {
+  if(snake_body[0].x >= 20 || snake_body[0].x < 0 || snake_body[0].y >= 20 || snake_body[0].y < 0) {
     is_dead  = true;
   }
 
@@ -174,7 +173,6 @@ inline bool is_snake_dead(void) {
   }
   return is_dead;
 }
-
 
 /*F******************************************************************
  * draw_arena(void)
