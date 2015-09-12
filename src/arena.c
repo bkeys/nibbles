@@ -16,8 +16,7 @@ bool is_init  = true;
 unsigned int snake_length;
 unsigned int obstacle_amount;
 
-unsigned int fruit_x;
-unsigned int fruit_y;
+point fruit;
 point *snake_body;
 point *obstacle_points;
 
@@ -87,7 +86,7 @@ void update_snake(void) {
  *F*/
 inline bool is_snake_eating(void) {
 
-  if(snake_body[0].x == fruit_x && snake_body[0].y == fruit_y) {
+  if(snake_body[0].x == fruit.x && snake_body[0].y == fruit.y) {
     return true;
   }
   return false;  
@@ -97,15 +96,38 @@ inline bool is_snake_eating(void) {
  * init_fruit(void)
  * 
  * PURPOSE : Places the fruit on the map after it has been eaten, or
- *           the player has died
+ *           the player has died. It also handles the fruit so that
+ *           it does not spawn on top of the snake or obstacles
  *
  * RETURN :  void
  *
  * NOTES :   
  *F*/
 inline void init_fruit(void) {
-  fruit_x  = rand() % 20;
-  fruit_y  = rand() % 20;
+
+    bool is_fruit_init  = false;
+  do {
+
+    is_fruit_init  = false;
+    fruit.x  = rand() % 20;
+    fruit.y  = rand() % 20;
+
+    if(snake_body[0].x == fruit.x || snake_body[0].y == fruit.y) {
+      is_fruit_init  = true;
+    } else {
+      for(int i  = 0; i < obstacle_amount; ++i) {
+	if(obstacle_points[i].x == fruit.x &&
+	   obstacle_points[i].y == fruit.y) {
+	  is_fruit_init  = true;
+	}
+      }
+    }
+    for(int i  = 0; i < snake_length; ++i) {
+      if(snake_body[i].x == fruit.x && snake_body[i].y == fruit.y) {
+	is_fruit_init  = true;
+      }
+    }
+  }while(is_fruit_init);
 }
 
 /*F******************************************************************
@@ -127,9 +149,19 @@ inline void init_snake() {
   snake_length     = 4;
   snake_body       = (point*)calloc(sizeof(point), snake_length);
   snake_dir        = 1 + (rand() % 4);
-  snake_body[0].x  = rand() % 20;
-  snake_body[0].y  = rand() % 20;
 
+  do {
+    snake_body[0].x  = rand() % 20;
+    snake_body[0].y  = rand() % 20;
+  
+    for(int i  = 0; i < obstacle_amount; ++i) {
+      if(obstacle_points[i].x == snake_body[0].x &&
+	 obstacle_points[i].y == snake_body[0].y) {
+	continue;
+      }
+    }
+  }while(snake_body[0].x != fruit.x || snake_body[0].y != fruit.y);
+  
   init_fruit();
 }
 
@@ -198,13 +230,15 @@ void draw_arena() {
 	}
       }
 
+      //drawing the obstacle location
       for(int i  = 0; i < obstacle_amount; ++i) {
 	if(obstacle_points[i].x == x && obstacle_points[i].y == z) {
 	  glColor3f(0, 255, 0);
 	}
       }
 
-      if(fruit_x == x && fruit_y == z) {
+      //drawing the fruit
+      if(fruit.x == x && fruit.y == z) {
 	glColor3f(255, 0, 0);
       }
 
