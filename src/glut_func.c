@@ -1,11 +1,12 @@
 #include "glut_func.h"
 #include <stdio.h>
 
+bool is_paused  = false;
+
 /*F******************************************************************
  * idle(void)
  * 
- * PURPOSE : Our glutIdleFunc, it updates the screen and it clears
- *           the screen and checks for any errors OpenGL might have. 
+ * PURPOSE : Our glutIdleFunc, checks for errors
  *
  * RETURN :  void
  *
@@ -17,8 +18,6 @@ void idle(void) {
     glutLeaveMainLoop();
   }
 
-  glFlush();
-  glFinish();
   return;
 }
 
@@ -34,12 +33,9 @@ void idle(void) {
 void display() {
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glMatrixMode(GL_MODELVIEW);
-
-  glLoadIdentity();
-
-  update_arena();
-  
+  update_arena(is_paused);
+  glFlush();
+  glFinish();
   glutSwapBuffers();
 }
 
@@ -54,9 +50,12 @@ void display() {
  *F*/
 void reshape(GLsizei width, GLsizei height) {
 
-  if(height == 0) height = 1;
   GLfloat aspect = (GLfloat)width / (GLfloat)height;
 
+  if(height == 0) {
+    height = 1;
+  }
+  
   glViewport(0, 0, width, height);
 
   glMatrixMode(GL_PROJECTION);
@@ -79,6 +78,11 @@ void reshape(GLsizei width, GLsizei height) {
 void keyboard(unsigned char key, int x, int y) {
 
   switch(key) {
+
+  case 'P':
+  case 'p':
+    is_paused  = !is_paused;
+    break;
 
   case 'W':
   case 'w':

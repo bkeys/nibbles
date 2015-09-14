@@ -26,7 +26,7 @@
 #include <windows.h>
 #endif
 
-#include <GL/gl.h>
+#include <GL/freeglut.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -35,6 +35,6 @@ unsigned int snake_x;
 unsigned int snake_y;
 unsigned int snake_dir;
 
-void update_arena(void);
+void update_arena(bool is_paused);
 
 #endif //ARENA_H_INCLUDED

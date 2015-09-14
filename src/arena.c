@@ -35,7 +35,7 @@ void init_obstacle(void) {
   obstacle_points  = (point*)calloc(obstacle_amount, sizeof(point));
   for(int i  = 0; i < obstacle_amount; ++i) {
     obstacle_points[i].x  =  rand() % 20;
-    obstacle_points[i].y  =  rand() % 20;
+    obstacle_points[i].y  =  (rand() % 20) - 1;
   }
 }
 
@@ -108,23 +108,23 @@ inline void init_fruit(void) {
     bool is_fruit_init  = false;
   do {
 
-    is_fruit_init  = false;
+    is_fruit_init  = true;
     fruit.x  = rand() % 20;
-    fruit.y  = rand() % 20;
+    fruit.y  = (rand() % 20);
 
     if(snake_body[0].x == fruit.x || snake_body[0].y == fruit.y) {
-      is_fruit_init  = true;
+      is_fruit_init  = false;
     } else {
       for(int i  = 0; i < obstacle_amount; ++i) {
 	if(obstacle_points[i].x == fruit.x &&
 	   obstacle_points[i].y == fruit.y) {
-	  is_fruit_init  = true;
+	  is_fruit_init  = false;
 	}
       }
     }
     for(int i  = 0; i < snake_length; ++i) {
       if(snake_body[i].x == fruit.x && snake_body[i].y == fruit.y) {
-	is_fruit_init  = true;
+	is_fruit_init  = false;
       }
     }
   }while(is_fruit_init);
@@ -152,7 +152,7 @@ inline void init_snake() {
 
   do {
     snake_body[0].x  = rand() % 20;
-    snake_body[0].y  = rand() % 20;
+    snake_body[0].y  = (rand() % 20) - 1;
   
     for(int i  = 0; i < obstacle_amount; ++i) {
       if(obstacle_points[i].x == snake_body[0].x &&
@@ -179,19 +179,22 @@ inline bool is_snake_dead(void) {
 
   bool is_dead  = false;
   
+  //if the snake collided with an object
   for(int i  = 0; i < obstacle_amount; ++i) {
     if(obstacle_points[i].x == snake_body[0].x && obstacle_points[i].y == snake_body[0].y) {
       is_dead  = true;
     }
   }
 
+  //if the snake collided with itself
   for(int i  = 1; i < snake_length; ++i) {
     if(snake_body[i].x == snake_body[0].x && snake_body[i].y == snake_body[0].y) {
       is_dead  = true;
     }
   }
 
-  if(snake_body[0].x >= 20 || snake_body[0].x < 0 || snake_body[0].y >= 20 || snake_body[0].y < 0) {
+  //if the snake ran out of the arena
+  if(snake_body[0].x >= 20 || snake_body[0].x < 0 || snake_body[0].y >= 20 || snake_body[0].y == -1) {
     is_dead  = true;
   }
 
@@ -207,6 +210,32 @@ inline bool is_snake_dead(void) {
 }
 
 /*F******************************************************************
+ * draw_square(void)
+ * 
+ * PURPOSE : draws the square of each element in the arena
+ *
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
+inline void draw_square(int x, int y, bool element) {
+
+  if(element) {
+    glPushMatrix();
+    glTranslatef(x - 9, y - 6, -y + 5);
+    glutSolidCube(1);
+    glPopMatrix();
+  } else {
+  
+    glColor4f(.1, .2, .3, .3);
+    glPushMatrix();
+    glTranslatef(x - 9, y - 7, -y + 5);
+    glutSolidCube(1);
+    glPopMatrix();
+  }
+    
+}
+/*F******************************************************************
  * draw_arena(void)
  * 
  * PURPOSE : draws the arena to the buffer
@@ -217,46 +246,33 @@ inline bool is_snake_dead(void) {
  *F*/
 void draw_arena() {
 
-  glBegin(GL_QUADS);
   for(int x  = 0; x < 20; ++x) {
-    for(int z  = 0; z < 20;++z) {
-
-      glColor4f(.1, .2, .3, .3);
-
+    for(int y  = 0; y < 20;++y) {
+      
       //drawing the snake's location
       for(int i  = 0; i < snake_length; ++i) {
-	if(snake_body[i].x == x && snake_body[i].y == z) {
-	  glColor3f(0, 0, 255);
+	if(snake_body[i].x == x && snake_body[i].y == y) {
+	  glColor3ub(0, 0, 255);
+	  draw_square(x, y, true);
 	}
       }
 
       //drawing the obstacle location
       for(int i  = 0; i < obstacle_amount; ++i) {
-	if(obstacle_points[i].x == x && obstacle_points[i].y == z) {
-	  glColor3f(0, 255, 0);
+	if(obstacle_points[i].x == x && obstacle_points[i].y == y) {
+	  glColor3ub(0, 255, 0);
+	  draw_square(x, y, true);
 	}
       }
 
       //drawing the fruit
-      if(fruit.x == x && fruit.y == z) {
-	glColor3f(255, 0, 0);
+      if(fruit.x == x && fruit.y == y) {
+	glColor3ub(255, 0, 0);
+	draw_square(x, y, true);
       }
-
-      glVertex3f(x - 9,
-		 z - 6,
-		 -z - 14); //+-
-      glVertex3f(x - 10,
-		 z - 6,
-		 -z - 14); //--
-      glVertex3f(x - 10,
-		 (z + 1) - 6,
-		 -z - 15); //++
-      glVertex3f(x - 9,
-		 (z + 1) - 6,
-		 -z - 15); //-+
+      draw_square(x, y, false);
     }
   }
-  glEnd();
 
   glFlush();
   glFinish();
@@ -271,7 +287,7 @@ void draw_arena() {
  *
  * NOTES :   
  *F*/
-void update_arena(void) {
+void update_arena(bool is_paused) {
 
   if(is_init || is_snake_dead()) {
     init_snake();
@@ -285,6 +301,9 @@ void update_arena(void) {
     snake_body    = (point*)realloc(snake_body, snake_length * sizeof(point));
   }
 
-  update_snake();
+  if(!is_paused) {
+    update_snake();
+  }
+  
   draw_arena();
 }
