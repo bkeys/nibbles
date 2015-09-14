@@ -105,21 +105,16 @@ inline bool is_snake_eating(void) {
  *F*/
 inline void init_fruit(void) {
 
-    bool is_fruit_init  = false;
+    bool is_fruit_init  = true;
   do {
-
     is_fruit_init  = true;
     fruit.x  = rand() % 20;
     fruit.y  = (rand() % 20);
 
-    if(snake_body[0].x == fruit.x || snake_body[0].y == fruit.y) {
-      is_fruit_init  = false;
-    } else {
-      for(int i  = 0; i < obstacle_amount; ++i) {
-	if(obstacle_points[i].x == fruit.x &&
-	   obstacle_points[i].y == fruit.y) {
-	  is_fruit_init  = false;
-	}
+    for(int i  = 0; i < obstacle_amount; ++i) {
+      if(obstacle_points[i].x == fruit.x &&
+	 obstacle_points[i].y == fruit.y) {
+	is_fruit_init  = false;
       }
     }
     for(int i  = 0; i < snake_length; ++i) {
@@ -127,7 +122,7 @@ inline void init_fruit(void) {
 	is_fruit_init  = false;
       }
     }
-  }while(is_fruit_init);
+  }while(!is_fruit_init);
 }
 
 /*F******************************************************************
@@ -149,18 +144,22 @@ inline void init_snake() {
   snake_length     = 4;
   snake_body       = (point*)calloc(sizeof(point), snake_length);
   snake_dir        = 1 + (rand() % 4);
-
+  bool is_snake_init;
   do {
     snake_body[0].x  = rand() % 20;
     snake_body[0].y  = (rand() % 20) - 1;
+    is_snake_init  = true;
   
     for(int i  = 0; i < obstacle_amount; ++i) {
       if(obstacle_points[i].x == snake_body[0].x &&
 	 obstacle_points[i].y == snake_body[0].y) {
-	continue;
+	is_snake_init  = false;
       }
     }
-  }while(snake_body[0].x != fruit.x || snake_body[0].y != fruit.y);
+    if(snake_body[0].x != fruit.x || snake_body[0].y != fruit.y) {
+      is_snake_init  = false;
+    }
+  }while(is_snake_init);
   
   init_fruit();
 }
