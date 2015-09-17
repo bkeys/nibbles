@@ -234,6 +234,61 @@ inline void draw_square(int x, int y, bool element) {
   }
     
 }
+
+/*F******************************************************************
+ * draw_square(void)
+ * 
+ * PURPOSE : draws the square of each element in the arena
+ *
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
+inline void draw_fruit(int x, int y, bool element) {
+
+  if(element) {
+    glPushMatrix();
+    glTranslatef(x - 9, y - 6, -y + 5);
+    glutSolidSphere(.7, 20, 20);
+    glPopMatrix();
+  } else {
+  
+    glColor4f(.1, .2, .3, .3);
+    glPushMatrix();
+    glTranslatef(x - 9, y - 7, -y + 5);
+    glutSolidCube(1);
+    glPopMatrix();
+  }
+    
+}
+
+/*F******************************************************************
+ * draw_square(void)
+ * 
+ * PURPOSE : draws the square of each element in the arena
+ *
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
+inline void draw_obstacle(int x, int y, bool element) {
+
+  if(element) {
+    glPushMatrix();
+    glTranslatef(x - 9, y + 2.8, -y - 20);
+    glutSolidTeapot(.7);
+    glPopMatrix();
+  } else {
+  
+    glColor4f(.1, .2, .3, .3);
+    glPushMatrix();
+    glTranslatef(x - 9, y - 7, -y + 5);
+    glutSolidCube(1);
+    glPopMatrix();
+  }
+    
+}
+
 /*F******************************************************************
  * draw_arena(void)
  * 
@@ -260,14 +315,14 @@ void draw_arena() {
       for(int i  = 0; i < obstacle_amount; ++i) {
 	if(obstacle_points[i].x == x && obstacle_points[i].y == y) {
 	  glColor3ub(0, 255, 0);
-	  draw_square(x, y, true);
+	  draw_obstacle(x, y, true);
 	}
       }
 
       //drawing the fruit
       if(fruit.x == x && fruit.y == y) {
 	glColor3ub(255, 0, 0);
-	draw_square(x, y, true);
+	draw_fruit(x, y, true);
       }
       draw_square(x, y, false);
     }
