@@ -7,6 +7,10 @@
 #define SNAKE_LEFT   3
 #define SNAKE_RIGHT  4
 
+unsigned int snake_x;
+unsigned int snake_y;
+unsigned int snake_dir;
+
 typedef struct {
   int x;
   int y;
@@ -341,7 +345,7 @@ void draw_arena() {
  *
  * NOTES :   
  *F*/
-void update_arena(bool is_paused) {
+void update_arena(void) {
 
   if(is_init || is_snake_dead()) {
     init_snake();
@@ -355,9 +359,7 @@ void update_arena(bool is_paused) {
     snake_body    = (point*)realloc(snake_body, snake_length * sizeof(point));
   }
 
-  if(!is_paused) {
     update_snake();
-  }
   
   draw_arena();
 }

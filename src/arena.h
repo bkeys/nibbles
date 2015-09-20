@@ -31,10 +31,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-unsigned int snake_x;
-unsigned int snake_y;
-unsigned int snake_dir;
-
-void update_arena(bool is_paused);
+void update_arena(void);
 
 #endif //ARENA_H_INCLUDED
