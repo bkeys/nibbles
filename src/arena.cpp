@@ -225,14 +225,14 @@ inline void draw_square(int x, int y, bool element) {
 
   if(element) {
     glPushMatrix();
-    glTranslatef(x - 9, y - 6, -y + 5);
+    glTranslatef(x, y, -y);
     glutSolidCube(1);
     glPopMatrix();
   } else {
   
     glColor4f(.1, .2, .3, .3);
     glPushMatrix();
-    glTranslatef(x - 9, y - 7, -y + 5);
+    glTranslatef(x, y - 1, -y);
     glutSolidCube(1);
     glPopMatrix();
   }
@@ -252,14 +252,14 @@ inline void draw_fruit(int x, int y, bool element) {
 
   if(element) {
     glPushMatrix();
-    glTranslatef(x - 9, y - 6, -y + 5);
+    glTranslatef(x, y, -y);
     glutSolidSphere(.7, 20, 20);
     glPopMatrix();
   } else {
   
     glColor4f(.1, .2, .3, .3);
     glPushMatrix();
-    glTranslatef(x - 9, y - 7, -y + 5);
+    glTranslatef(x, y - 1, -y);
     glutSolidCube(1);
     glPopMatrix();
   }
@@ -279,14 +279,14 @@ inline void draw_obstacle(int x, int y, bool element) {
 
   if(element) {
     glPushMatrix();
-    glTranslatef(x - 9, y + 2.8, -y - 20);
+    glTranslatef(x, y, -y);
     glutSolidTeapot(.7);
     glPopMatrix();
   } else {
   
     glColor4f(.1, .2, .3, .3);
     glPushMatrix();
-    glTranslatef(x - 9, y - 7, -y + 5);
+    glTranslatef(x, y - 1, -y);
     glutSolidCube(1);
     glPopMatrix();
   }
@@ -345,7 +345,7 @@ void draw_arena() {
  *
  * NOTES :   
  *F*/
-void update_arena(void) {
+void Arena::update_arena(void) {
 
   if(is_init || is_snake_dead()) {
     init_snake();
@@ -359,7 +359,7 @@ void update_arena(void) {
     snake_body    = (point*)realloc(snake_body, snake_length * sizeof(point));
   }
 
-    update_snake();
+  update_snake();
   
   draw_arena();
 }

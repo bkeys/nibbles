@@ -1,7 +1,7 @@
 bin_PROGRAMS = snake
 
 #files of project
-snake_SOURCES = src/main.cpp src/arena.cpp src/arena.h src/FreeGlut.cpp src/FreeGlut.h
+snake_SOURCES = src/main.cpp src/arena.cpp src/arena.h src/SnakeGame.cpp src/SnakeGame.h
 
 AM_CXXFLAGS = -pedantic -O3 -std=c++11 -Werror
 

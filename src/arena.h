@@ -1,23 +1,18 @@
+#pragma once
 /*H**********************************************************************
- * FILENAME :        glut_func.h
+ * FILENAME :        arena.h
  *
  * DESCRIPTION :
- *       All our glut functions that are in the event processing loop
+ *       Contains main game content and holds the contents of the arena
+ *       such as the snake, fruit, and obstacles
  *
  * PUBLIC FUNCTIONS :
- *       void idle(void);
- *       void display(void);
- *       void keyboard(unsigned char key, int x, int y);
- *       void mouse(int button, int state, int x, int y);
- *       
+ *       update_arena(void)
  *
  * AUTHOR     :    Brigham Keys, Esq
  * START DATE :    07/31/2015
  *
  *H*/
-#ifndef ARENA_H_INCLUDED
-#define ARENA_H_INCLUDED
-
 #ifdef __MINGW32__
 #include <windows.h>
 #endif
@@ -29,8 +24,11 @@
 #include <GL/freeglut.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-void update_arena(void);
+class Arena {
 
-#endif //ARENA_H_INCLUDED
+ public:
+  void update_arena(void);
+
+ private:
+};

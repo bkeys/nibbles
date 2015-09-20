@@ -17,26 +17,26 @@
 #include <windows.h>
 #endif
 
-#include <GL/freeglut.h>
+#include <SDL2/SDL.h>
 #include <GL/glu.h>
-
+#include <GL/gl.h>
 #include "arena.h"
 
 extern unsigned int screen_dim;
 extern unsigned int snake_dir;
 
-class FreeGlut {
+class SnakeGame {
 
  public:
-  FreeGlut();
-  ~FreeGlut();
-  
+  SnakeGame();
+ ~SnakeGame();
+  void main_loop();
+  void idle(void);
+  void display(void);
+  void keyboard(const SDL_Event &event);
+  void reshape(GLsizei width, GLsizei height);
+  void special(int key, int x, int y);
  private:
-  static void idle(void);
-  static void display(void);
-  static void keyboard(unsigned char key, int x, int y);
-  static void mouse(int button, int state, int x, int y);
-  static void reshape(GLsizei width, GLsizei height);
-  static void special(int key, int x, int y);
-  static void timer(int value);
+  Arena arena;
+  
 };
