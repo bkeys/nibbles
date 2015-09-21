@@ -25,10 +25,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Obstacle.hpp"
+#include "Fruit.hpp"
+#include "Snake.hpp"
+
 class Arena {
 
  public:
+
+  Arena();
+  virtual ~Arena();
   void update_arena(void);
+  void draw(void);
 
  private:
+  bool is_snake_eating(void);
+  Obstacle *obs;
+  Fruit *fruit;
+  Snake *snake;
+  
 };

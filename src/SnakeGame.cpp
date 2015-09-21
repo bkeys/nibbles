@@ -1,4 +1,4 @@
-#include "SnakeGame.h"
+#include "SnakeGame.hpp"
 
 /*F******************************************************************
  * 
@@ -17,53 +17,6 @@
  *F*/
 SnakeGame::SnakeGame() {
 
-  char fakeParam[] = "fake";
-  char *fakeargv[] = { fakeParam, NULL };
-  int fakeargc = 1;
-  glutInit(&fakeargc, fakeargv);
-
-  /*---- initialization -------------------------------------------------*/
-  glEnable(GL_BLEND);
-  glEnable(GL_DEPTH_TEST);
-  glEnable(GL_COLOR_MATERIAL);
-  glDepthFunc(GL_LEQUAL);
-  glShadeModel(GL_SMOOTH);
-  glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  glClearColor (0.0, 0.0, 0.0, 0.0);
-  glShadeModel (GL_SMOOTH);
-
-  glEnable(GL_LIGHTING);
-  glEnable(GL_LIGHT0);
-  glEnable(GL_NORMALIZE);
-  //moving the matrix back
-  glTranslatef(-7.0f, 0.0f, -60);
-  /*---------------------------------------------------------------------*/
-
-  /*setting up viewport*/
-  int width  = 800;
-  int height = 600;
-
-  /* Height / width ration */
-  GLfloat ratio;
-
-  /* Protect against a divide by zero */
-  if (height == 0) {
-    height = 1;
-  }
-
-  ratio = (GLfloat)width / (GLfloat)height;
-
-  glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  gluPerspective(45.0f, ratio, 0.1f, 100.0f);
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
 }
 
 /*F******************************************************************
@@ -72,57 +25,54 @@ SnakeGame::SnakeGame() {
  * NOTES :   
  *F*/
 SnakeGame::~SnakeGame() {
-  SDL_Quit();
 }
 
 /*F******************************************************************
- * reshape(GLsizei width, GLsizei height)
  * 
- * PURPOSE : Our glutReshapeFunc, enables the window to be resized
+ * 
+ * PURPOSE : 
  *
- * RETURN :  void
+ * RETURN :  
  *
  * NOTES :   
  *F*/
-void SnakeGame::reshape(GLsizei width, GLsizei height) {
+void SnakeGame::run(void) {
+  bool is = true;
+  SDL_Event event;
+  Uint32 start;
+  const int FPS = 20;
 
-  GLfloat aspect = (GLfloat)width / (GLfloat)height;
+  while(is) {
+    start = SDL_GetTicks();
+    if(glGetError() != GL_NO_ERROR) {
+      exit(1);
+    }
 
-  if(height == 0) {
-    height = 1;
+    while(SDL_PollEvent(&event) != 0) {
+
+      switch(event.type){
+
+      case SDL_KEYDOWN:
+	keyboard(event);
+	break;
+      case SDL_QUIT:
+	is = false;
+	break;
+      }
+    }
+
+    arena.update_arena();
+    SDL_RenderPresent(displayRenderer);
+    if(1000/FPS > SDL_GetTicks() - start) {
+      SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
+    }
   }
-
-  glViewport(0, 0, width, height);
-
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-
-  gluPerspective(45.0f, aspect, 0.1f, 100.0f);
-  glFlush();
-  glFinish();
 }
 
 /*F******************************************************************
- * display(void)
+ * keyboard(const SDL_Event &event)
  * 
- * PURPOSE : Our glutDisplayFunc, draws our arena onto the screen
- *
- * RETURN :  void
- *
- * NOTES :   
- *F*/
-void SnakeGame::display(void) {
-
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  arena.update_arena();
-  glFlush();
-  glFinish();
-}
-
-/*F******************************************************************
- * keyboard(unsigned char key, int x, int y)
- * 
- * PURPOSE : our glutKeyboardFunc, it enables the user to exit the game
+ * PURPOSE : handles keyboard input for controlling the snake
  *
  * RETURN :  void
  *

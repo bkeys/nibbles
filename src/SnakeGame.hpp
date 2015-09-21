@@ -1,14 +1,18 @@
 #pragma once
 /*H**********************************************************************
- * FILENAME :        glut_func.h
+ * FILENAME :        SnakeGame.h
  *
  * DESCRIPTION :
- *       All our glut functions that are in the event processing loop
+ *       Contains the entire game.
+ *
+ * PUBLIC FUNCTIONS :
+ *       void run(); //main game loop
  *
  * AUTHOR     :    Brigham Keys, Esq
  * START DATE :    07/31/2015
  *
  *H*/
+
 #ifdef __MINGW32__
 #include <windows.h>
 #endif
@@ -17,26 +21,24 @@
 #include <windows.h>
 #endif
 
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
-#include "arena.h"
+#include "Arena.hpp"
+#include "Game.hpp"
 
 extern unsigned int screen_dim;
 extern unsigned int snake_dir;
 
-class SnakeGame {
+class SnakeGame : public Game {
 
  public:
   SnakeGame();
- ~SnakeGame();
-  void main_loop();
-  void idle(void);
-  void display(void);
-  void keyboard(const SDL_Event &event);
-  void reshape(GLsizei width, GLsizei height);
-  void special(int key, int x, int y);
+  virtual ~SnakeGame();
+  void run();
+
  private:
   Arena arena;
-  
+  void keyboard(const SDL_Event &event);
 };

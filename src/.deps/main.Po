@@ -1,13 +1,11 @@
-src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
+src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/time.h \
  /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stddef.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stdarg.h \
- /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h /usr/include/GL/freeglut.h \
+ /usr/include/bits/time.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/timex.h \
+ /usr/include/xlocale.h /usr/include/GL/freeglut.h \
  /usr/include/GL/freeglut_std.h /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/inttypes.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stdint.h \
@@ -15,28 +13,31 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/stdlib.h /usr/include/bits/waitflags.h \
  /usr/include/bits/waitstatus.h /usr/include/endian.h \
  /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/bits/byteswap-16.h /usr/include/xlocale.h \
- /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/byteswap-16.h /usr/include/sys/types.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
- /usr/include/GL/freeglut_ext.h /usr/include/SDL2/SDL.h \
- /usr/include/SDL2/SDL_main.h /usr/include/SDL2/SDL_stdinc.h \
- /usr/include/SDL2/SDL_config.h /usr/include/SDL2/SDL_config-x86_64.h \
- /usr/include/SDL2/SDL_platform.h /usr/include/SDL2/begin_code.h \
- /usr/include/SDL2/close_code.h /usr/include/string.h \
- /usr/include/strings.h /usr/include/ctype.h /usr/include/math.h \
- /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
- /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
- /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
- /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
- /usr/include/iconv.h /usr/include/SDL2/SDL_assert.h \
- /usr/include/SDL2/SDL_atomic.h /usr/include/SDL2/SDL_audio.h \
- /usr/include/SDL2/SDL_error.h /usr/include/SDL2/SDL_endian.h \
- /usr/include/SDL2/SDL_mutex.h /usr/include/SDL2/SDL_thread.h \
- /usr/include/SDL2/SDL_rwops.h /usr/include/SDL2/SDL_clipboard.h \
- /usr/include/SDL2/SDL_cpuinfo.h \
+ /usr/include/GL/freeglut_ext.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stdarg.h \
+ /usr/include/SDL2/SDL.h /usr/include/SDL2/SDL_main.h \
+ /usr/include/SDL2/SDL_stdinc.h /usr/include/SDL2/SDL_config.h \
+ /usr/include/SDL2/SDL_config-x86_64.h /usr/include/SDL2/SDL_platform.h \
+ /usr/include/SDL2/begin_code.h /usr/include/SDL2/close_code.h \
+ /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
+ /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
+ /usr/include/string.h /usr/include/strings.h /usr/include/ctype.h \
+ /usr/include/math.h /usr/include/bits/huge_val.h \
+ /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+ /usr/include/bits/inf.h /usr/include/bits/nan.h \
+ /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+ /usr/include/bits/mathinline.h /usr/include/iconv.h \
+ /usr/include/SDL2/SDL_assert.h /usr/include/SDL2/SDL_atomic.h \
+ /usr/include/SDL2/SDL_audio.h /usr/include/SDL2/SDL_error.h \
+ /usr/include/SDL2/SDL_endian.h /usr/include/SDL2/SDL_mutex.h \
+ /usr/include/SDL2/SDL_thread.h /usr/include/SDL2/SDL_rwops.h \
+ /usr/include/SDL2/SDL_clipboard.h /usr/include/SDL2/SDL_cpuinfo.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/mmintrin.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/mm_malloc.h \
@@ -54,11 +55,12 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/SDL2/SDL_messagebox.h /usr/include/SDL2/SDL_power.h \
  /usr/include/SDL2/SDL_render.h /usr/include/SDL2/SDL_system.h \
  /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h \
- /usr/include/bits/timex.h src/SnakeGame.h src/arena.h
+ src/SnakeGame.hpp src/Arena.hpp src/Obstacle.hpp src/Element.hpp \
+ src/Fruit.hpp src/Snake.hpp src/Game.hpp
 
 /usr/include/stdc-predef.h:
 
-/usr/include/stdio.h:
+/usr/include/time.h:
 
 /usr/include/features.h:
 
@@ -72,23 +74,15 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
 
 /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stddef.h:
 
+/usr/include/bits/time.h:
+
 /usr/include/bits/types.h:
 
 /usr/include/bits/typesizes.h:
 
-/usr/include/libio.h:
+/usr/include/bits/timex.h:
 
-/usr/include/_G_config.h:
-
-/usr/include/wchar.h:
-
-/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stdarg.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/sys_errlist.h:
-
-/usr/include/bits/stdio.h:
+/usr/include/xlocale.h:
 
 /usr/include/GL/freeglut.h:
 
@@ -122,19 +116,13 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
 
 /usr/include/bits/byteswap-16.h:
 
-/usr/include/xlocale.h:
-
 /usr/include/sys/types.h:
-
-/usr/include/time.h:
 
 /usr/include/sys/select.h:
 
 /usr/include/bits/select.h:
 
 /usr/include/bits/sigset.h:
-
-/usr/include/bits/time.h:
 
 /usr/include/sys/sysmacros.h:
 
@@ -147,6 +135,8 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
 /usr/include/bits/stdlib-float.h:
 
 /usr/include/GL/freeglut_ext.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stdarg.h:
 
 /usr/include/SDL2/SDL.h:
 
@@ -163,6 +153,20 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
 /usr/include/SDL2/begin_code.h:
 
 /usr/include/SDL2/close_code.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
 
 /usr/include/string.h:
 
@@ -270,8 +274,16 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/stdio.h \
 
 /usr/include/SDL2/SDL_version.h:
 
-/usr/include/bits/timex.h:
+src/SnakeGame.hpp:
 
-src/SnakeGame.h:
+src/Arena.hpp:
 
-src/arena.h:
+src/Obstacle.hpp:
+
+src/Element.hpp:
+
+src/Fruit.hpp:
+
+src/Snake.hpp:
+
+src/Game.hpp:

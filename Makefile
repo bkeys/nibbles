@@ -100,8 +100,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
-am_snake_OBJECTS = src/main.$(OBJEXT) src/arena.$(OBJEXT) \
-	src/SnakeGame.$(OBJEXT)
+am_snake_OBJECTS = src/main.$(OBJEXT) src/Arena.$(OBJEXT) \
+	src/SnakeGame.$(OBJEXT) src/Game.$(OBJEXT) src/Snake.$(OBJEXT) \
+	src/Element.$(OBJEXT) src/Fruit.$(OBJEXT)
 snake_OBJECTS = $(am_snake_OBJECTS)
 snake_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -280,7 +281,7 @@ top_builddir = .
 top_srcdir = .
 
 #files of project
-snake_SOURCES = src/main.cpp src/arena.cpp src/arena.h src/SnakeGame.cpp src/SnakeGame.h
+snake_SOURCES = src/main.cpp src/Arena.cpp src/Arena.hpp src/SnakeGame.cpp src/SnakeGame.hpp src/Game.hpp src/Game.cpp src/Snake.hpp src/Snake.cpp src/Element.hpp src/Element.cpp src/Fruit.hpp src/Fruit.cpp
 AM_CXXFLAGS = -pedantic -O3 -std=c++11 -Werror
 
 #using an m4 directory for macros
@@ -390,9 +391,14 @@ src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/$(DEPDIR)
 	@: > src/$(DEPDIR)/$(am__dirstamp)
 src/main.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
-src/arena.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Arena.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/SnakeGame.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/Game.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Snake.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Element.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/Fruit.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 
 snake$(EXEEXT): $(snake_OBJECTS) $(snake_DEPENDENCIES) $(EXTRA_snake_DEPENDENCIES) 
 	@rm -f snake$(EXEEXT)
@@ -405,8 +411,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include src/$(DEPDIR)/Arena.Po
+include src/$(DEPDIR)/Element.Po
+include src/$(DEPDIR)/Fruit.Po
+include src/$(DEPDIR)/Game.Po
+include src/$(DEPDIR)/Snake.Po
 include src/$(DEPDIR)/SnakeGame.Po
-include src/$(DEPDIR)/arena.Po
 include src/$(DEPDIR)/main.Po
 
 .cpp.o:
