@@ -61,7 +61,7 @@ void SnakeGame::run(void) {
       }
     }
 
-    arena.update_arena();
+    arena.update();
     SDL_RenderPresent(displayRenderer);
     if(1000/FPS > SDL_GetTicks() - start) {
       SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
@@ -83,31 +83,19 @@ void SnakeGame::keyboard(const SDL_Event &event) {
   switch(event.key.keysym.scancode) {
 
   case SDL_SCANCODE_W:
-    if(snake_dir == 2) {
-      return;
-    }
-    snake_dir  = 1;
+    arena.snake->setDir(UP);
     break;
 
   case SDL_SCANCODE_S:
-    if(snake_dir == 1) {
-      return;
-    }
-    snake_dir  = 2;
+    arena.snake->setDir(DOWN);
     break;
 
   case SDL_SCANCODE_A:
-    if(snake_dir == 4) {
-      return;
-    }
-    snake_dir  = 3;
+    arena.snake->setDir(LEFT);
     break;
 
   case SDL_SCANCODE_D:
-    if(snake_dir == 3) {
-      return;
-    }
-    snake_dir  = 4;
+    arena.snake->setDir(RIGHT);
     break;
   }
   glFlush();

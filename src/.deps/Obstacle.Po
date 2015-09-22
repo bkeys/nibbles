@@ -1,6 +1,7 @@
-src/Element.o: src/Element.cpp /usr/include/stdc-predef.h src/Element.hpp \
- /usr/include/GL/freeglut.h /usr/include/GL/freeglut_std.h \
- /usr/include/GL/gl.h /usr/include/GL/glext.h \
+src/Obstacle.o: src/Obstacle.cpp /usr/include/stdc-predef.h \
+ src/Obstacle.hpp src/Element.hpp /usr/include/GL/freeglut.h \
+ /usr/include/GL/freeglut_std.h /usr/include/GL/gl.h \
+ /usr/include/GL/glext.h \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stddef.h \
  /usr/include/inttypes.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
@@ -21,6 +22,8 @@ src/Element.o: src/Element.cpp /usr/include/stdc-predef.h src/Element.hpp \
  /usr/lib/gcc/x86_64-redhat-linux/4.9.2/include/stdarg.h
 
 /usr/include/stdc-predef.h:
+
+src/Obstacle.hpp:
 
 src/Element.hpp:
 

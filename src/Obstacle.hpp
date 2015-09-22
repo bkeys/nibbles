@@ -1,10 +1,10 @@
 #pragma once
 /*H**********************************************************************
- * FILENAME :        
+ * FILENAME :        Obstacle.hpp
  *
  * DESCRIPTION :
- *       
- *       
+ *       A snake can run into an obstacle and it will cause the snake
+ *       to die and the game to restart
  *       
  *       
  *
@@ -21,5 +21,5 @@ class Obstacle : public Element {
 
 public:
   Obstacle();
-  void draw();
+  void draw(void);
 };

@@ -16,6 +16,9 @@
  *
  *H*/
 
+#include <GL/freeglut.h>
+#include <GL/gl.h>
+
 class Element {
 
 public:

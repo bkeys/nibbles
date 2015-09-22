@@ -28,9 +28,6 @@
 #include "Arena.hpp"
 #include "Game.hpp"
 
-extern unsigned int screen_dim;
-extern unsigned int snake_dir;
-
 class SnakeGame : public Game {
 
  public:

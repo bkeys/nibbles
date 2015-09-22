@@ -24,6 +24,7 @@
 #include <GL/freeglut.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "Obstacle.hpp"
 #include "Fruit.hpp"
@@ -35,13 +36,14 @@ class Arena {
 
   Arena();
   virtual ~Arena();
-  void update_arena(void);
+  void update(void);
   void draw(void);
+  Snake *snake;
 
  private:
+  bool is_snake_dead(void);
   bool is_snake_eating(void);
-  Obstacle *obs;
+  Obstacle *obstacle;
   Fruit *fruit;
-  Snake *snake;
   
 };

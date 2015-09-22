@@ -102,7 +102,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_snake_OBJECTS = src/main.$(OBJEXT) src/Arena.$(OBJEXT) \
 	src/SnakeGame.$(OBJEXT) src/Game.$(OBJEXT) src/Snake.$(OBJEXT) \
-	src/Element.$(OBJEXT) src/Fruit.$(OBJEXT)
+	src/Element.$(OBJEXT) src/Fruit.$(OBJEXT) \
+	src/Obstacle.$(OBJEXT)
 snake_OBJECTS = $(am_snake_OBJECTS)
 snake_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -281,8 +282,8 @@ top_builddir = .
 top_srcdir = .
 
 #files of project
-snake_SOURCES = src/main.cpp src/Arena.cpp src/Arena.hpp src/SnakeGame.cpp src/SnakeGame.hpp src/Game.hpp src/Game.cpp src/Snake.hpp src/Snake.cpp src/Element.hpp src/Element.cpp src/Fruit.hpp src/Fruit.cpp
-AM_CXXFLAGS = -pedantic -O3 -std=c++11 -Werror
+snake_SOURCES = src/main.cpp src/Arena.cpp src/Arena.hpp src/SnakeGame.cpp src/SnakeGame.hpp src/Game.hpp src/Game.cpp src/Snake.hpp src/Snake.cpp src/Element.hpp src/Element.cpp src/Fruit.hpp src/Fruit.cpp src/Obstacle.cpp src/Obstacle.hpp
+AM_CXXFLAGS = -pedantic -O3 -std=c++11 -Werror -g
 
 #using an m4 directory for macros
 ACLOCAL_AMFLAGS = -I m4 --install
@@ -399,6 +400,8 @@ src/Snake.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
 src/Element.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/Fruit.$(OBJEXT): src/$(am__dirstamp) src/$(DEPDIR)/$(am__dirstamp)
+src/Obstacle.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 
 snake$(EXEEXT): $(snake_OBJECTS) $(snake_DEPENDENCIES) $(EXTRA_snake_DEPENDENCIES) 
 	@rm -f snake$(EXEEXT)
@@ -415,6 +418,7 @@ include src/$(DEPDIR)/Arena.Po
 include src/$(DEPDIR)/Element.Po
 include src/$(DEPDIR)/Fruit.Po
 include src/$(DEPDIR)/Game.Po
+include src/$(DEPDIR)/Obstacle.Po
 include src/$(DEPDIR)/Snake.Po
 include src/$(DEPDIR)/SnakeGame.Po
 include src/$(DEPDIR)/main.Po
