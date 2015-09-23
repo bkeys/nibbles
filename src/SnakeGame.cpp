@@ -15,17 +15,14 @@
  *
  * NOTES :   
  *F*/
-SnakeGame::SnakeGame() {
-
-}
+SnakeGame::SnakeGame() {}
 
 /*F***********************************************************
  * DESTRUCTOR
  * 
  * NOTES :   
  *F*/
-SnakeGame::~SnakeGame() {
-}
+SnakeGame::~SnakeGame() {}
 
 /*F***********************************************************
  * 
@@ -61,7 +58,9 @@ void SnakeGame::run(void) {
       }
     }
 
-    arena.update();
+    if(!paused) {
+      arena.update();
+    }
     SDL_RenderPresent(displayRenderer);
     if(1000/FPS > SDL_GetTicks() - start) {
       SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
@@ -82,21 +81,29 @@ void SnakeGame::keyboard(const SDL_Event &event) {
 
   switch(event.key.keysym.scancode) {
 
+  case SDL_SCANCODE_P:
+    if(!paused) {
+      paused = true;
+    } else {
+      paused = false;
+    }
+    return;
+
   case SDL_SCANCODE_W:
     arena.snake->setDir(UP);
-    break;
+    return;
 
   case SDL_SCANCODE_S:
     arena.snake->setDir(DOWN);
-    break;
+    return;
 
   case SDL_SCANCODE_A:
     arena.snake->setDir(LEFT);
-    break;
+    return;
 
   case SDL_SCANCODE_D:
     arena.snake->setDir(RIGHT);
-    break;
+    return;
   }
   glFlush();
   glFinish();

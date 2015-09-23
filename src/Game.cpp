@@ -10,6 +10,8 @@
  *F*/
 
 Game::Game() {
+
+  paused = false;
   char fakeParam[] = "fake";
   char *fakeargv[] = { fakeParam, NULL };
   int fakeargc = 1;

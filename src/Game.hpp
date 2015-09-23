@@ -1,15 +1,17 @@
 #pragma once
-/*H**********************************************************************
+/*H***********************************************************
  * FILENAME :        Game.h
  *
  * DESCRIPTION :
- *       Universal abstract game class. Class contains the basic elements
- *       of all games that I create. That being an SDL2 window, FreeGlut
- *       funcitonality and OpenGL 3D capabilities. This class is abstract
- *       and is to be inherited from.
+ *       Universal abstract game class. Class contains the
+ *       basic elements of all games that I create. That
+ *       being an SDL2 window, FreeGlut funcitonality and
+ *       OpenGL 3D capabilities. This class is abstract.
  *
  * PUBLIC FUNCTIONS :
  *       void run(); //The main game loop
+ *       int get_score //retrieve player score
+ *       void set_score //set the player's score
  *
  * AUTHOR     :    Brigham Keys, Esq
  * START DATE :    09/20/2015
@@ -29,6 +31,7 @@ class Game {
   virtual void run()=0;
   int get_score();
   void set_score(int s);
+  bool paused;
  private:
 
  protected:
@@ -36,6 +39,5 @@ class Game {
   SDL_Renderer* displayRenderer;
   SDL_Window* displayWindow;
   SDL_RendererInfo displayRendererInfo;
-
 };
 
