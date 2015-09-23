@@ -17,7 +17,7 @@
  *F*/
 Obstacle::Obstacle() {
   iter = item.begin();
-  for(int j = 0; j < 5; ++j) {
+  for(int j = 0; j < rand() % 10; ++j) {
     Item b;
     item.push_back(b);
   }

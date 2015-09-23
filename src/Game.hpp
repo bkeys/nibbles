@@ -27,10 +27,12 @@ class Game {
   Game();
   ~Game();
   virtual void run()=0;
-
+  int get_score();
+  void set_score(int s);
  private:
 
  protected:
+  unsigned int score;
   SDL_Renderer* displayRenderer;
   SDL_Window* displayWindow;
   SDL_RendererInfo displayRendererInfo;

@@ -1,5 +1,6 @@
 #pragma once
-/*H*********************************************************** * FILENAME :        Element.h
+/*H***********************************************************
+ * FILENAME :        Element.h
  *
  * DESCRIPTION :
  *       Abstract class that is used for all elements inside

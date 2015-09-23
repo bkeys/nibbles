@@ -1,5 +1,14 @@
 #include "Game.hpp"
 
+/*F***********************************************************
+ * DEFAULT CONSTRUCTOR
+ * 
+ * PURPOSE : Initializes FreeGlut, OpenGL, and SDL2 to create
+ *           a window with a 3D scene ready for rendering.
+ *           
+ * NOTES :   
+ *F*/
+
 Game::Game() {
   char fakeParam[] = "fake";
   char *fakeargv[] = { fakeParam, NULL };
@@ -13,7 +22,7 @@ Game::Game() {
     exit(1);
   }
 
-  /*---- initialization -------------------------------------------------*/
+  /*---- initialization ------------------------------------*/
   glEnable(GL_BLEND);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_COLOR_MATERIAL);
@@ -26,7 +35,7 @@ Game::Game() {
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_NORMALIZE);
-  /*---------------------------------------------------------------------*/
+  /*--------------------------------------------------------*/
 
   /*setting up viewport*/
   int width  = 800;
@@ -53,6 +62,41 @@ Game::Game() {
   glTranslatef(-9.5f, -5.0f, -19);
 }
 
+/*F***********************************************************
+ * get_score(void)
+ * 
+ * PURPOSE : gets the player's score
+ *           
+ *           
+ * RETURN :  int | the player's score
+ *
+ * NOTES :   
+ *F*/
+
+int Game::get_score(void) {
+  return score;
+}
+
+/*F***********************************************************
+ * set_score(int s)
+ * 
+ * PURPOSE : sets the player's score
+ *           
+ *           
+ * RETURN :  void
+ *
+ * NOTES :   
+ *F*/
+
+void Game::set_score(int s) {
+  score = s;
+}
+
+/*F***********************************************************
+ * DESTRUCTOR
+ * 
+ * NOTES :   
+ *F*/
 Game::~Game() {
 
   SDL_DestroyRenderer(displayRenderer);
