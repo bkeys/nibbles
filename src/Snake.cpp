@@ -1,6 +1,6 @@
 #include "Snake.hpp"
 
-/*F******************************************************************
+/*F***********************************************************
  * 
  * 
  * PURPOSE : 
@@ -10,7 +10,7 @@
  * NOTES :   
  *F*/
 
-/*F******************************************************************
+/*F***********************************************************
  * setDir(Dir direction)
  * 
  * PURPOSE : Sets the direction of the snake
@@ -24,36 +24,36 @@ void Snake::setDir(Dir direction) {
   switch(dir) {
 
   case UP:
-    if(direction == DOWN)
-      return;
+    if(direction == DOWN) return;
     dir = direction;
-    break;
+    return;
     
   case DOWN:
-    if(direction == UP)
-      return;
+    if(direction == UP) return;
     dir = direction;
-    break;
+    return;
     
   case RIGHT:
-    if(direction == LEFT)
-      return;
+    if(direction == LEFT) return;
     dir = direction;
-    break;
+    return;
     
   case LEFT:
-    if(direction == RIGHT)
-      return;
+    if(direction == RIGHT) return;
     dir = direction;
-    break;
+    return;
+
+  default:
+
+    return;
   }
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * grow(int size)
  * 
- * PURPOSE : Grows the snake longer to a specific size. The snake 
- *           cannot be shrunk
+ * PURPOSE : Grows the snake longer to a specific size. The
+ *           snake cannot be shrunk
  *
  * RETURN :  void
  *
@@ -61,41 +61,66 @@ void Snake::setDir(Dir direction) {
  *F*/
 void Snake::grow(int size) {
 
-
+  for(int i = 0; i < size; ++i) {
+    Body b;
+    body.push_back(b);
+  }
+  
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * snake(void)
  * 
- * PURPOSE : enables the snake to move according to the direction it
- *           is currently facing
+ * PURPOSE : enables the snake to move according to
+ *           the direction it is currently facing
  * 
  * RETURN :  void
  *
  * NOTES :   
  *F*/
 void Snake::update(void) {
-  
+  /*
+  for(i = body.begin(); i != body.end();++i) {
+    
+  }  
+  */
+  i = body.begin();
+  int tempx = (*i).getX();
+  int tempy = (*i).getY();
+
+  Body e;
+  body.push_front(e);
+  body.pop_back();
+
+  i = body.begin();
+  (*i).setX(tempx);
+  (*i).setY(tempy);
+
   switch(dir) {
 
   case UP:
-    break;
+    (*i).setY((*i).getY() + 1);
+    return;
 
   case DOWN:
-    break;
+    (*i).setY((*i).getY() - 1);
+    return;
 
   case LEFT:
-    break;
+    (*i).setX((*i).getX() - 1);
+    return;
 
   case RIGHT:
-    break;
+    (*i).setX((*i).getX() + 1);
+    return;
 
   default:// throw an error
-    break;
+    std::cout << "error involving dir" << std::endl;
+    return;
   }
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * DEFAULT CONSTRUCTOR
  * 
  * NOTES :   
@@ -103,11 +128,11 @@ void Snake::update(void) {
 Snake::Snake() {
 
   dir = UP;
-
-  grow(3);
+  i = body.begin();
+  grow(4);
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * DESTRUCTOR
  * 
  * NOTES :   
@@ -116,7 +141,7 @@ Snake::~Snake() {
   
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * draw(void)
  * 
  * PURPOSE : draws the entire snake body onto the screen 
@@ -126,6 +151,8 @@ Snake::~Snake() {
  * NOTES :   
  *F*/
 void Snake::draw(void) {
-  
-  
+
+  for(i = body.begin(); i != body.end();++i) {
+    (*i).draw();
+  }
 }
