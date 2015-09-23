@@ -22,8 +22,8 @@ src/Arena.o: src/Arena.cpp /usr/include/stdc-predef.h src/Arena.hpp \
  /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
  /usr/include/wchar.h /usr/include/bits/stdio_lim.h \
  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
- /usr/include/bits/timex.h src/Obstacle.hpp src/Element.hpp src/Fruit.hpp \
- src/Snake.hpp /usr/include/c++/4.9.2/iostream \
+ /usr/include/bits/timex.h src/Obstacle.hpp src/Element.hpp \
+ /usr/include/c++/4.9.2/iostream \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/os_defines.h \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/cpu_defines.h \
@@ -95,7 +95,9 @@ src/Arena.o: src/Arena.cpp /usr/include/stdc-predef.h src/Arena.hpp \
  /usr/include/c++/4.9.2/bits/locale_facets.tcc \
  /usr/include/c++/4.9.2/bits/basic_ios.tcc \
  /usr/include/c++/4.9.2/bits/ostream.tcc /usr/include/c++/4.9.2/istream \
- /usr/include/c++/4.9.2/bits/istream.tcc
+ /usr/include/c++/4.9.2/bits/istream.tcc src/Fruit.hpp src/Snake.hpp \
+ /usr/include/c++/4.9.2/list /usr/include/c++/4.9.2/bits/stl_list.h \
+ /usr/include/c++/4.9.2/bits/list.tcc
 
 /usr/include/stdc-predef.h:
 
@@ -196,10 +198,6 @@ src/Arena.hpp:
 src/Obstacle.hpp:
 
 src/Element.hpp:
-
-src/Fruit.hpp:
-
-src/Snake.hpp:
 
 /usr/include/c++/4.9.2/iostream:
 
@@ -380,3 +378,13 @@ src/Snake.hpp:
 /usr/include/c++/4.9.2/istream:
 
 /usr/include/c++/4.9.2/bits/istream.tcc:
+
+src/Fruit.hpp:
+
+src/Snake.hpp:
+
+/usr/include/c++/4.9.2/list:
+
+/usr/include/c++/4.9.2/bits/stl_list.h:
+
+/usr/include/c++/4.9.2/bits/list.tcc:

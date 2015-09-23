@@ -61,11 +61,13 @@ void Snake::setDir(Dir direction) {
  *F*/
 void Snake::grow(int size) {
 
-  for(int i = 0; i < size; ++i) {
+  i = body.begin();
+  for(int j = 0; j < size; ++j) {
     Body b;
+    b.setX((*i).getX());
+    b.setY((*i).getY());
     body.push_back(b);
   }
-  
 }
 
 /*F***********************************************************
@@ -79,11 +81,7 @@ void Snake::grow(int size) {
  * NOTES :   
  *F*/
 void Snake::update(void) {
-  /*
-  for(i = body.begin(); i != body.end();++i) {
-    
-  }  
-  */
+
   i = body.begin();
   int tempx = (*i).getX();
   int tempy = (*i).getY();

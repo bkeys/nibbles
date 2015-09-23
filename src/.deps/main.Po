@@ -56,7 +56,7 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/time.h \
  /usr/include/SDL2/SDL_render.h /usr/include/SDL2/SDL_system.h \
  /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h \
  src/SnakeGame.hpp src/Arena.hpp src/Obstacle.hpp src/Element.hpp \
- src/Fruit.hpp src/Snake.hpp /usr/include/c++/4.9.2/iostream \
+ /usr/include/c++/4.9.2/iostream \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/os_defines.h \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/cpu_defines.h \
@@ -128,7 +128,9 @@ src/main.o: src/main.cpp /usr/include/stdc-predef.h /usr/include/time.h \
  /usr/include/c++/4.9.2/bits/locale_facets.tcc \
  /usr/include/c++/4.9.2/bits/basic_ios.tcc \
  /usr/include/c++/4.9.2/bits/ostream.tcc /usr/include/c++/4.9.2/istream \
- /usr/include/c++/4.9.2/bits/istream.tcc src/Game.hpp
+ /usr/include/c++/4.9.2/bits/istream.tcc src/Fruit.hpp src/Snake.hpp \
+ /usr/include/c++/4.9.2/list /usr/include/c++/4.9.2/bits/stl_list.h \
+ /usr/include/c++/4.9.2/bits/list.tcc src/Game.hpp
 
 /usr/include/stdc-predef.h:
 
@@ -354,10 +356,6 @@ src/Obstacle.hpp:
 
 src/Element.hpp:
 
-src/Fruit.hpp:
-
-src/Snake.hpp:
-
 /usr/include/c++/4.9.2/iostream:
 
 /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/c++config.h:
@@ -535,5 +533,15 @@ src/Snake.hpp:
 /usr/include/c++/4.9.2/istream:
 
 /usr/include/c++/4.9.2/bits/istream.tcc:
+
+src/Fruit.hpp:
+
+src/Snake.hpp:
+
+/usr/include/c++/4.9.2/list:
+
+/usr/include/c++/4.9.2/bits/stl_list.h:
+
+/usr/include/c++/4.9.2/bits/list.tcc:
 
 src/Game.hpp:

@@ -23,7 +23,7 @@
 int main(int argc, char *argv[]) {
 
   srand(time(NULL));
-
+  
   SnakeGame *f = new SnakeGame();
   f->run();
   return 0;

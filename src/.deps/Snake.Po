@@ -93,7 +93,9 @@ src/Snake.o: src/Snake.cpp /usr/include/stdc-predef.h src/Snake.hpp \
  /usr/include/c++/4.9.2/bits/locale_facets.tcc \
  /usr/include/c++/4.9.2/bits/basic_ios.tcc \
  /usr/include/c++/4.9.2/bits/ostream.tcc /usr/include/c++/4.9.2/istream \
- /usr/include/c++/4.9.2/bits/istream.tcc /usr/include/GL/gl.h \
+ /usr/include/c++/4.9.2/bits/istream.tcc /usr/include/c++/4.9.2/list \
+ /usr/include/c++/4.9.2/bits/stl_list.h \
+ /usr/include/c++/4.9.2/bits/list.tcc /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/inttypes.h \
  /usr/include/GL/freeglut.h /usr/include/GL/freeglut_std.h \
  /usr/include/GL/glu.h /usr/include/GL/freeglut_ext.h src/Element.hpp
@@ -359,6 +361,12 @@ src/Snake.hpp:
 /usr/include/c++/4.9.2/istream:
 
 /usr/include/c++/4.9.2/bits/istream.tcc:
+
+/usr/include/c++/4.9.2/list:
+
+/usr/include/c++/4.9.2/bits/stl_list.h:
+
+/usr/include/c++/4.9.2/bits/list.tcc:
 
 /usr/include/GL/gl.h:
 

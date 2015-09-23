@@ -1,6 +1,6 @@
 #include "Arena.hpp"
 
-/*F******************************************************************
+/*F***********************************************************
  * is_snake_eating(void)
  * 
  * PURPOSE : Determines collision between the snake and the fruit
@@ -12,9 +12,17 @@
  *F*/
 bool Arena::is_snake_eating(void) {
 
+  snake->i = snake->body.begin();
+  
+  if(snake->i->getX() == fruit->getX() &&
+     snake->i->getY() == fruit->getY()) {
+    return true;
+  }
+  return false;
+
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * is_snake_dead(void)
  * 
  * PURPOSE : inline function that checks if the snake is dead
@@ -26,9 +34,39 @@ bool Arena::is_snake_eating(void) {
  *F*/
 bool Arena::is_snake_dead(void) {
 
+  snake->i = snake->body.begin();
+
+  int snake_headX = snake->i->getX();
+  int snake_headY = snake->i->getY();
+  
+  //did we hit an obstacle?
+  if(snake_headX == obstacle->getX() &&
+     snake_headY == obstacle->getY()) {
+    return true;
+  }
+
+  //are we out of the arena?
+  if(snake_headX == 20 ||
+     snake_headY == 20 ||
+     snake_headX == -1 ||
+     snake_headY == -2) {
+    return true;
+  }
+
+  ++snake->i; //skip the head
+
+  //self collision
+  while(snake->i != snake->body.end()) {
+    if(snake_headX == snake->i->getX() &&
+       snake_headY == snake->i->getY()) {
+      return true;
+    }
+    ++snake->i;
+  }
+  return false;
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * draw(void)
  * 
  * PURPOSE : draws the arena to the buffer
@@ -78,11 +116,11 @@ Arena::~Arena() {
   }
 }
 
-/*F******************************************************************
+/*F***********************************************************
  * update_arena(void)
  * 
- * PURPOSE : checks all possible events that could of occured in the
- *           arena
+ * PURPOSE : checks all possible events that could of occured
+ *           in the arena
  *
  * RETURN :  void
  *
@@ -91,5 +129,19 @@ Arena::~Arena() {
 void Arena::update(void) {
 
   snake->update();
+  if(is_snake_dead()) {
+    snake    = new Snake();
+    obstacle = new Obstacle();
+    fruit    = new Fruit();
+  }
+
+  if(is_snake_eating()) {
+    if(fruit != NULL) {
+      delete[] fruit;
+    }
+    fruit = new Fruit();
+    snake->grow(2);
+  }
+
   draw();
 }

@@ -1,5 +1,5 @@
 #pragma once
-/*H**********************************************************************
+/*H***********************************************************
  * FILENAME :        Snake.hpp
  *
  * DESCRIPTION :
@@ -27,13 +27,14 @@
  *H*/
 
 #include <iostream>
+#include <list>
 #include <GL/gl.h>
 #include <GL/freeglut.h>
 #include "Element.hpp"
 
 enum Dir {UP, DOWN, RIGHT, LEFT};
 
-class SnakeBody : public Element {
+class Body : public Element {
 
 public:
   void draw() {
@@ -54,8 +55,9 @@ public:
   void draw(void);
   void grow(int size);
   void setDir(Dir direction);
+  std::list<Body> body;
+  std::list<Body>::iterator i;
   
 private:
-
   Dir dir;
 };

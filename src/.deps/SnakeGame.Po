@@ -54,8 +54,7 @@ src/SnakeGame.o: src/SnakeGame.cpp /usr/include/stdc-predef.h \
  /usr/include/GL/glu.h /usr/include/GL/gl.h /usr/include/GL/glext.h \
  src/Arena.hpp /usr/include/GL/freeglut.h /usr/include/GL/freeglut_std.h \
  /usr/include/GL/freeglut_ext.h /usr/include/bits/timex.h \
- src/Obstacle.hpp src/Element.hpp src/Fruit.hpp src/Snake.hpp \
- /usr/include/c++/4.9.2/iostream \
+ src/Obstacle.hpp src/Element.hpp /usr/include/c++/4.9.2/iostream \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/os_defines.h \
  /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/cpu_defines.h \
@@ -127,7 +126,9 @@ src/SnakeGame.o: src/SnakeGame.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.9.2/bits/locale_facets.tcc \
  /usr/include/c++/4.9.2/bits/basic_ios.tcc \
  /usr/include/c++/4.9.2/bits/ostream.tcc /usr/include/c++/4.9.2/istream \
- /usr/include/c++/4.9.2/bits/istream.tcc src/Game.hpp
+ /usr/include/c++/4.9.2/bits/istream.tcc src/Fruit.hpp src/Snake.hpp \
+ /usr/include/c++/4.9.2/list /usr/include/c++/4.9.2/bits/stl_list.h \
+ /usr/include/c++/4.9.2/bits/list.tcc src/Game.hpp
 
 /usr/include/stdc-predef.h:
 
@@ -353,10 +354,6 @@ src/Obstacle.hpp:
 
 src/Element.hpp:
 
-src/Fruit.hpp:
-
-src/Snake.hpp:
-
 /usr/include/c++/4.9.2/iostream:
 
 /usr/include/c++/4.9.2/x86_64-redhat-linux/bits/c++config.h:
@@ -534,5 +531,15 @@ src/Snake.hpp:
 /usr/include/c++/4.9.2/istream:
 
 /usr/include/c++/4.9.2/bits/istream.tcc:
+
+src/Fruit.hpp:
+
+src/Snake.hpp:
+
+/usr/include/c++/4.9.2/list:
+
+/usr/include/c++/4.9.2/bits/stl_list.h:
+
+/usr/include/c++/4.9.2/bits/list.tcc:
 
 src/Game.hpp:
