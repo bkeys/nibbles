@@ -96,7 +96,9 @@ src/Obstacle.o: src/Obstacle.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.9.2/bits/istream.tcc /usr/include/GL/freeglut.h \
  /usr/include/GL/freeglut_std.h /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/inttypes.h /usr/include/GL/glu.h \
- /usr/include/GL/freeglut_ext.h
+ /usr/include/GL/freeglut_ext.h src/Snake.hpp /usr/include/c++/4.9.2/list \
+ /usr/include/c++/4.9.2/bits/stl_list.h \
+ /usr/include/c++/4.9.2/bits/list.tcc
 
 /usr/include/stdc-predef.h:
 
@@ -375,3 +377,11 @@ src/Element.hpp:
 /usr/include/GL/glu.h:
 
 /usr/include/GL/freeglut_ext.h:
+
+src/Snake.hpp:
+
+/usr/include/c++/4.9.2/list:
+
+/usr/include/c++/4.9.2/bits/stl_list.h:
+
+/usr/include/c++/4.9.2/bits/list.tcc:

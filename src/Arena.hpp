@@ -41,6 +41,7 @@ class Arena {
   Snake *snake;
 
  private:
+  void correct_elements();
   bool is_snake_dead(void);
   bool is_snake_eating(void);
   Obstacle *obstacle;

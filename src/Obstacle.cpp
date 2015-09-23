@@ -16,8 +16,11 @@
  * NOTES :   
  *F*/
 Obstacle::Obstacle() {
-  x = rand() % 20;
-  y = (rand() % 20) -1;
+  iter = item.begin();
+  for(int j = 0; j < 5; ++j) {
+    Item b;
+    item.push_back(b);
+  }
 }
 
 /*F***********************************************************
@@ -30,9 +33,7 @@ Obstacle::Obstacle() {
  * NOTES :   
  *F*/
 void Obstacle::draw(void) {
-  glColor3ub(0, 255, 0);
-  glPushMatrix();
-  glTranslatef(x, y, -y);
-  glutSolidTeapot(.7);
-  glPopMatrix();
+  for(iter = item.begin(); iter != item.end();++iter) {
+    (*iter).draw();
+  }
 }

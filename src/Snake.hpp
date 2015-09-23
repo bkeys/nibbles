@@ -56,7 +56,7 @@ public:
   void grow(int size);
   void setDir(Dir direction);
   std::list<Body> body;
-  std::list<Body>::iterator i;
+  std::list<Body>::iterator iter;
   
 private:
   Dir dir;

@@ -23,6 +23,5 @@
 class Fruit : public Element {
 
 public:
-  Fruit();
   void draw();
 };

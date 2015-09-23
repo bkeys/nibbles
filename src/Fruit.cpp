@@ -1,27 +1,9 @@
 #include "Fruit.hpp"
 
-/*F******************************************************************
- * init_fruit(void)
+/*F***********************************************************
+ * draw(void)
  * 
- * PURPOSE : Places the fruit on the map after it has been eaten, or
- *           the player has died. It also handles the fruit so that
- *           it does not spawn on top of the snake or obstacles
- *
- * RETURN :  void
- *
- * NOTES :   
- *F*/
-Fruit::Fruit() {
-
-  x  = rand() % 20;
-  y  = (rand() % 20);
-
-}
-
-/*F******************************************************************
- * 
- * 
- * PURPOSE : 
+ * PURPOSE : Draws the fruit onto the screen
  *
  * RETURN :  
  *

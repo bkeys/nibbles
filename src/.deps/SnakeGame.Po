@@ -126,9 +126,9 @@ src/SnakeGame.o: src/SnakeGame.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.9.2/bits/locale_facets.tcc \
  /usr/include/c++/4.9.2/bits/basic_ios.tcc \
  /usr/include/c++/4.9.2/bits/ostream.tcc /usr/include/c++/4.9.2/istream \
- /usr/include/c++/4.9.2/bits/istream.tcc src/Fruit.hpp src/Snake.hpp \
+ /usr/include/c++/4.9.2/bits/istream.tcc src/Snake.hpp \
  /usr/include/c++/4.9.2/list /usr/include/c++/4.9.2/bits/stl_list.h \
- /usr/include/c++/4.9.2/bits/list.tcc src/Game.hpp
+ /usr/include/c++/4.9.2/bits/list.tcc src/Fruit.hpp src/Game.hpp
 
 /usr/include/stdc-predef.h:
 
@@ -532,8 +532,6 @@ src/Element.hpp:
 
 /usr/include/c++/4.9.2/bits/istream.tcc:
 
-src/Fruit.hpp:
-
 src/Snake.hpp:
 
 /usr/include/c++/4.9.2/list:
@@ -541,5 +539,7 @@ src/Snake.hpp:
 /usr/include/c++/4.9.2/bits/stl_list.h:
 
 /usr/include/c++/4.9.2/bits/list.tcc:
+
+src/Fruit.hpp:
 
 src/Game.hpp:

@@ -19,6 +19,7 @@
  * NOTES :   
  *F*/
 Element::Element() {
+
   x = rand() % 20;
   y = rand() % 20 - 1;
 }

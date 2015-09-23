@@ -61,11 +61,11 @@ void Snake::setDir(Dir direction) {
  *F*/
 void Snake::grow(int size) {
 
-  i = body.begin();
+  iter = body.begin();
   for(int j = 0; j < size; ++j) {
     Body b;
-    b.setX((*i).getX());
-    b.setY((*i).getY());
+    b.setX((*iter).getX());
+    b.setY((*iter).getY());
     body.push_back(b);
   }
 }
@@ -82,34 +82,34 @@ void Snake::grow(int size) {
  *F*/
 void Snake::update(void) {
 
-  i = body.begin();
-  int tempx = (*i).getX();
-  int tempy = (*i).getY();
+  iter = body.begin();
+  int tempx = (*iter).getX();
+  int tempy = (*iter).getY();
 
   Body e;
   body.push_front(e);
   body.pop_back();
 
-  i = body.begin();
-  (*i).setX(tempx);
-  (*i).setY(tempy);
+  iter = body.begin();
+  (*iter).setX(tempx);
+  (*iter).setY(tempy);
 
   switch(dir) {
 
   case UP:
-    (*i).setY((*i).getY() + 1);
+    (*iter).setY((*iter).getY() + 1);
     return;
 
   case DOWN:
-    (*i).setY((*i).getY() - 1);
+    (*iter).setY((*iter).getY() - 1);
     return;
 
   case LEFT:
-    (*i).setX((*i).getX() - 1);
+    (*iter).setX((*iter).getX() - 1);
     return;
 
   case RIGHT:
-    (*i).setX((*i).getX() + 1);
+    (*iter).setX((*iter).getX() + 1);
     return;
 
   default:// throw an error
@@ -125,9 +125,34 @@ void Snake::update(void) {
  *F*/
 Snake::Snake() {
 
-  dir = UP;
-  i = body.begin();
-  grow(4);
+  
+
+  switch(rand() % 4) {
+  case 0:
+    dir = UP;
+    break;
+
+  case 1:
+    dir = DOWN;
+    break;
+
+  case 2:
+    dir = RIGHT;
+    break;
+
+  case 3:
+    dir = LEFT;
+    break;
+  }
+
+  iter = body.begin();
+  Body b;
+  b.setX(rand() % 20);
+  b.setY(rand() % 20 - 1);
+  body.push_back(b);
+
+  grow(3);
+
 }
 
 /*F***********************************************************
@@ -150,7 +175,7 @@ Snake::~Snake() {
  *F*/
 void Snake::draw(void) {
 
-  for(i = body.begin(); i != body.end();++i) {
-    (*i).draw();
+  for(iter = body.begin(); iter != body.end();++iter) {
+    (*iter).draw();
   }
 }
