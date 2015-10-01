@@ -41,7 +41,10 @@ class Arena {
   Snake *snake;
 
  private:
-  void correct_elements();
+  void correct_elements(void);
+  void correct_fruit(void);
+  void correct_obstacle(void);
+  void correct_snake(void);
   bool is_snake_dead(void);
   bool is_snake_eating(void);
   Obstacle *obstacle;

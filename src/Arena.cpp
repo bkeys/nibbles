@@ -111,34 +111,77 @@ void Arena::draw(void) {
 }
 
 /*F***********************************************************
- * correct_elements
+ * correct_fruit(void)
  * 
- * PURPOSE : gives the user a clean spawn with nothing on
- *           top of the snake or right next to it as it
- *           spawns
+ * PURPOSE : fruit does not spawn on top of snake
  *           
- *           
- * RETURN :  void
- *
  * NOTES :   will require recursion
  *F*/
-void Arena::correct_elements() {
+void Arena::correct_fruit(void) {
 
-  snake    = new Snake();
-  obstacle = new Obstacle();
- fruit_init:
-  fruit    = new Fruit();
-
-  //fruit does not spawn on top of snake
   for(snake->iter = snake->body.begin();
       snake->iter != snake->body.end();
       ++snake->iter) {
     if(fruit->getX() == snake->iter->getX() &&
        fruit->getY() == snake->iter->getY()) {
       delete[] fruit;
-      goto fruit_init; //inb4 bad practice
+      fruit = new Fruit();
+      correct_fruit();
     }
   }
+}
+
+/*F***********************************************************
+ * correct_obstacle(void)
+ * 
+ * PURPOSE : ensures that the fruit does not spawn on the
+ *           obstacle
+ *           
+ *           
+ * NOTES :   will require recursion
+ *F*/
+void Arena::correct_obstacle(void) {
+
+  //obstacle and fruit are not on the same spot
+  for(obstacle->iter = obstacle->item.begin();
+      obstacle->iter != obstacle->item.end();
+      ++obstacle->iter) {
+    if(fruit->getX() == obstacle->iter->getX() &&
+       fruit->getY() == obstacle->iter->getY()) {
+      delete[] fruit;
+      fruit = new Fruit();
+      correct_fruit();
+    }
+  }
+}
+
+/*F***********************************************************
+ * correct_
+ * 
+ * PURPOSE : 
+ *           
+ *           
+ *           
+ * NOTES :   will require recursion
+ *F*/
+void Arena::correct_snake(void) {
+
+}
+
+/*F***********************************************************
+ * correct_elements
+ * 
+ * PURPOSE : gives the user a clean spawn with nothing on
+ *           top of the snake or right next to it as it
+ *           spawns
+ *           
+ * NOTES :   will require recursion
+ *F*/
+void Arena::correct_elements(void) {
+
+  correct_fruit();
+  correct_obstacle();
+  correct_snake();
 
     //making sure the snake does not hit an
     //obstacle right as it spawns
@@ -151,6 +194,9 @@ void Arena::correct_elements() {
  * NOTES :   
  *F*/
 Arena::Arena() {
+  snake    = new Snake();
+  obstacle = new Obstacle();
+  fruit    = new Fruit();
   correct_elements();
 }
 
@@ -160,15 +206,7 @@ Arena::Arena() {
  * NOTES :   
  *F*/
 Arena::~Arena() {
-  if(snake != NULL) {
-    delete[] snake;
-  }
-  if(obstacle != NULL) {
-    delete[] obstacle;
-  }
-  if(fruit != NULL) {
-    delete[] fruit;
-  }
+  delete[] this;
 }
 
 /*F***********************************************************
@@ -201,6 +239,8 @@ void Arena::update(void) {
       delete[] fruit;
     }
     fruit = new Fruit();
+    correct_fruit();
+    correct_obstacle();
     snake->grow(2);
   }
   draw();
