@@ -29,6 +29,7 @@
 #include "Obstacle.hpp"
 #include "Fruit.hpp"
 #include "Snake.hpp"
+#include "Font.hpp"
 
 class Arena {
 
@@ -37,11 +38,13 @@ class Arena {
   Arena();
   virtual ~Arena();
   void update(void);
-  void draw(void);
+  inline void draw(void);
   Snake *snake;
 
  private:
-  void correct_elements(void);
+  unsigned int score;
+  Font *font;
+  inline void correct_elements(void);
   void correct_fruit(void);
   void correct_obstacle(void);
   void correct_snake(void);
@@ -49,5 +52,4 @@ class Arena {
   bool is_snake_eating(void);
   Obstacle *obstacle;
   Fruit *fruit;
-  
 };

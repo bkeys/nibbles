@@ -65,36 +65,6 @@ Game::Game() {
 }
 
 /*F***********************************************************
- * get_score(void)
- * 
- * PURPOSE : gets the player's score
- *           
- *           
- * RETURN :  int | the player's score
- *
- * NOTES :   
- *F*/
-
-int Game::get_score(void) {
-  return score;
-}
-
-/*F***********************************************************
- * set_score(int s)
- * 
- * PURPOSE : sets the player's score
- *           
- *           
- * RETURN :  void
- *
- * NOTES :   
- *F*/
-
-void Game::set_score(int s) {
-  score = s;
-}
-
-/*F***********************************************************
  * DESTRUCTOR
  * 
  * NOTES :   

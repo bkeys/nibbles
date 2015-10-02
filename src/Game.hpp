@@ -35,7 +35,6 @@ class Game {
  private:
 
  protected:
-  unsigned int score;
   SDL_Renderer* displayRenderer;
   SDL_Window* displayWindow;
   SDL_RendererInfo displayRendererInfo;

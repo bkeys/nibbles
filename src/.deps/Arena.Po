@@ -97,7 +97,8 @@ src/Arena.o: src/Arena.cpp /usr/include/stdc-predef.h src/Arena.hpp \
  /usr/include/c++/4.9.2/bits/ostream.tcc /usr/include/c++/4.9.2/istream \
  /usr/include/c++/4.9.2/bits/istream.tcc src/Snake.hpp \
  /usr/include/c++/4.9.2/list /usr/include/c++/4.9.2/bits/stl_list.h \
- /usr/include/c++/4.9.2/bits/list.tcc src/Fruit.hpp
+ /usr/include/c++/4.9.2/bits/list.tcc src/Fruit.hpp src/Font.hpp \
+ /usr/include/string.h
 
 /usr/include/stdc-predef.h:
 
@@ -388,3 +389,7 @@ src/Snake.hpp:
 /usr/include/c++/4.9.2/bits/list.tcc:
 
 src/Fruit.hpp:
+
+src/Font.hpp:
+
+/usr/include/string.h:

@@ -15,7 +15,9 @@
  *
  * NOTES :   
  *F*/
-SnakeGame::SnakeGame() {}
+SnakeGame::SnakeGame() {
+  is = true;
+}
 
 /*F***********************************************************
  * DESTRUCTOR
@@ -25,16 +27,15 @@ SnakeGame::SnakeGame() {}
 SnakeGame::~SnakeGame() {}
 
 /*F***********************************************************
+ * run(void);
  * 
- * 
- * PURPOSE : 
+ * PURPOSE : serves as the main game loop
  *
- * RETURN :  
+ * RETURN :  void
  *
  * NOTES :   
  *F*/
 void SnakeGame::run(void) {
-  bool is = true;
   SDL_Event event;
   Uint32 start;
   const int FPS = 20;
@@ -87,6 +88,10 @@ void SnakeGame::keyboard(const SDL_Event &event) {
     } else {
       paused = false;
     }
+    return;
+
+  case SDL_SCANCODE_Q:
+    is = false;
     return;
 
   case SDL_SCANCODE_W:

@@ -36,6 +36,8 @@ class SnakeGame : public Game {
   void run();
 
  private:
+  bool is; //is the game running
+
   Arena arena;
   void keyboard(const SDL_Event &event);
 };

@@ -89,6 +89,7 @@ bool Arena::is_snake_dead(void) {
  *F*/
 void Arena::draw(void) {
 
+  char buffer[50] = {};
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   //drawing the floor
@@ -105,6 +106,11 @@ void Arena::draw(void) {
   snake->draw();
   obstacle->draw();
   fruit->draw();
+  glColor3ub(255, 255, 255);
+  sprintf(buffer, "%d", score);
+  font->bitmap_output(0, 10, "3D Nibbles");
+  font->bitmap_output(0, 8, "Score:");
+  font->bitmap_output(0, 7, buffer);
 
   glFlush();
   glFinish();
@@ -177,15 +183,10 @@ void Arena::correct_snake(void) {
  *           
  * NOTES :   will require recursion
  *F*/
-void Arena::correct_elements(void) {
-
+inline void Arena::correct_elements(void) {
   correct_fruit();
   correct_obstacle();
   correct_snake();
-
-    //making sure the snake does not hit an
-    //obstacle right as it spawns
-    //still needs work
 }
 
 /*F***********************************************************
@@ -194,6 +195,8 @@ void Arena::correct_elements(void) {
  * NOTES :   
  *F*/
 Arena::Arena() {
+  score = 0;
+  font     = new Font();
   snake    = new Snake();
   obstacle = new Obstacle();
   fruit    = new Fruit();
@@ -210,7 +213,7 @@ Arena::~Arena() {
 }
 
 /*F***********************************************************
- * update_arena(void)
+ * update(void)
  * 
  * PURPOSE : checks all possible events that could of occured
  *           in the arena
@@ -226,13 +229,10 @@ void Arena::update(void) {
     snake    = new Snake();
     obstacle = new Obstacle;
     fruit    = new Fruit();
+    score = 0;
   }
 
-  if(fruit->getX() == obstacle->iter->getX() &&
-     fruit->getY() == obstacle->iter->getY()) {
-    delete[] fruit;
-    fruit = new Fruit();
-  }
+  correct_obstacle();
 
   if(is_snake_eating()) {
     if(fruit != NULL) {
@@ -242,6 +242,7 @@ void Arena::update(void) {
     correct_fruit();
     correct_obstacle();
     snake->grow(2);
+    score++;
   }
   draw();
 }
