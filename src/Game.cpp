@@ -17,6 +17,7 @@ Game::Game() {
   int fakeargc = 1;
   glutInit(&fakeargc, fakeargv);
   SDL_Init(SDL_INIT_EVERYTHING);
+  SDL_ShowCursor(SDL_DISABLE);
   SDL_CreateWindowAndRenderer(800, 600, SDL_WINDOW_OPENGL, &displayWindow, &displayRenderer);
   SDL_GetRendererInfo(displayRenderer, &displayRendererInfo);
   if((displayRendererInfo.flags & SDL_RENDERER_ACCELERATED) == 0 ||
@@ -62,6 +63,8 @@ Game::Game() {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glTranslatef(-9.5f, -5.0f, -19);
+
+
 }
 
 /*F***********************************************************
