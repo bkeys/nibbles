@@ -11,13 +11,6 @@
  * NOTES :   
  *F*/
 
-
-/*void Arena::drawBackground(void) {
-
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-  }*/
-
 /*F***********************************************************
  * is_snake_eating(void)
  * 
@@ -97,8 +90,8 @@ bool Arena::is_snake_dead(void) {
 void Arena::draw(void) {
 
   char buffer[50] = {};
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   //drawing the floor
   for(int x  = 0; x < 20; ++x) {
     for(int y  = 0; y < 20;++y) {
@@ -115,9 +108,13 @@ void Arena::draw(void) {
   fruit->draw();
   glColor3ub(255, 255, 255);
   sprintf(buffer, "%d", score);
-  font->bitmap_output(0, 10, "3D Nibbles");
-  font->bitmap_output(0, 8, "Score:");
-  font->bitmap_output(0, 7, buffer);
+  font->bitmap_output(0, 12, "3D Nibbles");
+  font->bitmap_output(0, 11, "Score:");
+  font->bitmap_output(0, 10, buffer);
+
+  sprintf(buffer, "%d", obstacle->item.size());
+  font->bitmap_output(15, 12, "Total obstacles");
+  font->bitmap_output(16, 11, buffer);
 
   glFlush();
   glFinish();
