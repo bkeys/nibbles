@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 
 #include "Obstacle.hpp"
 #include "Fruit.hpp"
@@ -35,16 +36,18 @@ class Arena {
 
  public:
 
-  Arena();
-  virtual ~Arena();
+  Arena(void);
+  virtual ~Arena(void);
   void update(void);
   inline void draw(void);
   Snake *snake;
 
  private:
+  float rot;
   unsigned int score;
   Font *font;
   inline void correct_elements(void);
+  void drawRainbowTriangle(void);
   void correct_fruit(void);
   void correct_obstacle(void);
   void correct_snake(void);

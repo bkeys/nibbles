@@ -78,6 +78,29 @@ bool Arena::is_snake_dead(void) {
   return false;
 }
 
+void Arena::drawRainbowTriangle(void) {
+
+  ++rot;
+  for(int i = 1; i < 20; ++i) {
+  glPushMatrix();
+  glTranslatef(i + 1.25, i - .5, -12 - i);
+  glRotatef((rot / 2) * i, 1, 1, 1);
+  //some linear algebra
+  glScalef(-.5 * cos((rot / 20) * i), 1, 1);
+  glColor4f(.1, .2, .3, .3);
+  glBegin(GL_TRIANGLES);
+  glColor3ub(255, 0, 0);
+  glVertex3f(0, 0, -5);
+  glColor3ub(0, 255, 0);
+  glVertex3f(5, 0, -5);
+  glColor3ub(0, 0, 255);
+  glVertex3f(0, 5, -5);
+  glEnd();
+  glPopMatrix();
+  }
+
+}
+
 /*F***********************************************************
  * draw(void)
  * 
@@ -90,12 +113,19 @@ bool Arena::is_snake_dead(void) {
 void Arena::draw(void) {
 
   char buffer[50] = {};
-
+  
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  if(rot > 360) {
+    drawRainbowTriangle();
+  } else {
+    drawRainbowTriangle();
+  }
+  
+  glColor4f(.1, .2, .3, .3);
   //drawing the floor
   for(int x  = 0; x < 20; ++x) {
     for(int y  = 0; y < 20;++y) {
-      glColor4f(.1, .2, .3, .3);
       glPushMatrix();
       glTranslatef(x, y - 1, -y);
       glutSolidCube(1);
@@ -198,8 +228,9 @@ inline void Arena::correct_elements(void) {
  * 
  * NOTES :   
  *F*/
-Arena::Arena() {
-  score = 0;
+Arena::Arena(void) {
+  rot      = 0;
+  score    = 0;
   font     = new Font();
   snake    = new Snake();
   obstacle = new Obstacle();
@@ -212,7 +243,7 @@ Arena::Arena() {
  * 
  * NOTES :   
  *F*/
-Arena::~Arena() {
+Arena::~Arena(void) {
   delete[] this;
 }
 
