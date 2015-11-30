@@ -1,26 +1,5 @@
 #include "Arena.hpp"
 
-/*F***********************************************************
- * 
- * 
- * PURPOSE : 
- *           
- *           
- * RETURN :  
- *
- * NOTES :   
- *F*/
-
-/*F***********************************************************
- * is_snake_eating(void)
- * 
- * PURPOSE : Determines collision between the snake and the
- *           fruit
- *           
- * RETURN :  bool | true if snake is eating, false if not
- *
- * NOTES :   
- *F*/
 bool Arena::is_snake_eating(void) {
 
   snake->iter = snake->body.begin();
@@ -32,15 +11,6 @@ bool Arena::is_snake_eating(void) {
   return false;
 }
 
-/*F***********************************************************
- * is_snake_dead(void)
- * 
- * PURPOSE : inline function that checks if the snake is dead
- *
- * RETURN :  bool | true if dead, false if not
- *
- * NOTES :   
- *F*/
 bool Arena::is_snake_dead(void) {
 
   snake->iter = snake->body.begin();
@@ -101,15 +71,6 @@ void Arena::drawRainbowTriangle(void) {
 
 }
 
-/*F***********************************************************
- * draw(void)
- * 
- * PURPOSE : draws the arena to the buffer
- *
- * RETURN :  void
- *
- * NOTES :   
- *F*/
 void Arena::draw(void) {
 
   char buffer[50] = {};
@@ -142,7 +103,7 @@ void Arena::draw(void) {
   font->bitmap_output(0, 11, "Score:");
   font->bitmap_output(0, 10, buffer);
 
-  sprintf(buffer, "%d", obstacle->item.size());
+  sprintf(buffer, "%d", static_cast<int>(obstacle->item.size()));
   font->bitmap_output(15, 12, "Total obstacles");
   font->bitmap_output(16, 11, buffer);
 

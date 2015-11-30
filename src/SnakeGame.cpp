@@ -1,40 +1,11 @@
 #include "SnakeGame.hpp"
 
-/*F***********************************************************
- * 
- * 
- * PURPOSE : 
- *
- * RETURN :  
- *
- * NOTES :   
- *F*/
-
-/*F***********************************************************
- * DEFAULT CONSTRUCTOR
- *
- * NOTES :   
- *F*/
 SnakeGame::SnakeGame() {
   is = true;
 }
 
-/*F***********************************************************
- * DESTRUCTOR
- * 
- * NOTES :   
- *F*/
 SnakeGame::~SnakeGame() {}
 
-/*F***********************************************************
- * run(void);
- * 
- * PURPOSE : serves as the main game loop
- *
- * RETURN :  void
- *
- * NOTES :   
- *F*/
 void SnakeGame::run(void) {
   SDL_Event event;
   Uint32 start;
@@ -56,6 +27,8 @@ void SnakeGame::run(void) {
       case SDL_QUIT:
 	is = false;
 	break;
+      default:
+	break;
       }
     }
 
@@ -69,15 +42,6 @@ void SnakeGame::run(void) {
   }
 }
 
-/*F***********************************************************
- * keyboard(const SDL_Event &event)
- * 
- * PURPOSE : handles keyboard input for controlling the snake
- *
- * RETURN :  void
- *
- * NOTES :   
- *F*/
 void SnakeGame::keyboard(const SDL_Event &event) {
 
   switch(event.key.keysym.scancode) {
@@ -109,6 +73,9 @@ void SnakeGame::keyboard(const SDL_Event &event) {
   case SDL_SCANCODE_D:
     arena.snake->setDir(RIGHT);
     return;
+  default:
+    break;
+
   }
   glFlush();
   glFinish();

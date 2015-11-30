@@ -1,0 +1,11 @@
+# Ignore binary files
+bin/
+
+# Ignore CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+#ignore emacs backup files
+*~

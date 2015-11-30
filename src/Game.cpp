@@ -52,9 +52,9 @@ Game::Game() {
     height = 1;
   }
 
-  ratio = (GLfloat)width / (GLfloat)height;
+  ratio = static_cast<GLfloat>(width) / static_cast<GLfloat>(height);
 
-  glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+  glViewport(0, 0, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
