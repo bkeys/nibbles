@@ -1,6 +1,7 @@
 #include "SnakeGame.hpp"
 
-SnakeGame::SnakeGame() {
+SnakeGame::SnakeGame() :
+Game() {
   is = true;
 }
 
@@ -14,6 +15,7 @@ void SnakeGame::run(void) {
   while(is) {
     start = SDL_GetTicks();
     if(glGetError() != GL_NO_ERROR) {
+      std::cout << "OpenGL Error!" << std::endl;
       exit(1);
     }
 
@@ -35,7 +37,9 @@ void SnakeGame::run(void) {
     if(!paused) {
       arena.update();
     }
-    SDL_RenderPresent(displayRenderer);
+        SDL_GL_SwapWindow(displayWindow);
+
+    //SDL_RenderPresent(displayRenderer);
     if(1000/FPS > SDL_GetTicks() - start) {
       SDL_Delay(1000/FPS - (SDL_GetTicks() - start));
     }
@@ -77,6 +81,6 @@ void SnakeGame::keyboard(const SDL_Event &event) {
     break;
 
   }
-  glFlush();
-  glFinish();
+  //glFlush();
+  //glFinish();
 }

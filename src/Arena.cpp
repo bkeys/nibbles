@@ -1,9 +1,10 @@
 #include "Arena.hpp"
-
+#include <chrono>
+#include <thread>
 bool Arena::is_snake_eating(void) {
 
   snake->iter = snake->body.begin();
-  
+
   if(snake->iter->getX() == fruit->getX() &&
      snake->iter->getY() == fruit->getY()) {
     return true;
@@ -17,7 +18,7 @@ bool Arena::is_snake_dead(void) {
 
   int snake_headX = snake->iter->getX();
   int snake_headY = snake->iter->getY();
-  
+
   //are we out of the arena?
   if(snake_headX == 20 ||
      snake_headY == 20 ||
@@ -28,7 +29,7 @@ bool Arena::is_snake_dead(void) {
 
 
   for(obstacle->iter = obstacle->item.begin(); obstacle->iter != obstacle->item.end();++obstacle->iter) {
-    
+
     //did we hit an obstacle?
     if(snake_headX == obstacle->iter->getX() &&
        snake_headY == obstacle->iter->getY()) {
@@ -74,15 +75,10 @@ void Arena::drawRainbowTriangle(void) {
 void Arena::draw(void) {
 
   char buffer[50] = {};
-  
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  if(rot > 360) {
-    drawRainbowTriangle();
-  } else {
-    drawRainbowTriangle();
-  }
-  
+  drawRainbowTriangle();
+
   glColor4f(.1, .2, .3, .3);
   //drawing the floor
   for(int x  = 0; x < 20; ++x) {
@@ -107,15 +103,13 @@ void Arena::draw(void) {
   font->bitmap_output(15, 12, "Total obstacles");
   font->bitmap_output(16, 11, buffer);
 
-  glFlush();
-  glFinish();
 }
 
 /*F***********************************************************
  * correct_fruit(void)
- * 
+ *
  * PURPOSE : fruit does not spawn on top of snake
- *           
+ *
  * NOTES :   will require recursion
  *F*/
 void Arena::correct_fruit(void) {
@@ -134,11 +128,11 @@ void Arena::correct_fruit(void) {
 
 /*F***********************************************************
  * correct_obstacle(void)
- * 
+ *
  * PURPOSE : ensures that the fruit does not spawn on the
  *           obstacle
- *           
- *           
+ *
+ *
  * NOTES :   will require recursion
  *F*/
 void Arena::correct_obstacle(void) {
@@ -158,11 +152,11 @@ void Arena::correct_obstacle(void) {
 
 /*F***********************************************************
  * correct_
- * 
- * PURPOSE : 
- *           
- *           
- *           
+ *
+ * PURPOSE :
+ *
+ *
+ *
  * NOTES :   will require recursion
  *F*/
 void Arena::correct_snake(void) {
@@ -171,11 +165,11 @@ void Arena::correct_snake(void) {
 
 /*F***********************************************************
  * correct_elements
- * 
+ *
  * PURPOSE : gives the user a clean spawn with nothing on
  *           top of the snake or right next to it as it
  *           spawns
- *           
+ *
  * NOTES :   will require recursion
  *F*/
 inline void Arena::correct_elements(void) {
@@ -186,8 +180,8 @@ inline void Arena::correct_elements(void) {
 
 /*F***********************************************************
  * DEFAULT CONSTRUCTOR
- * 
- * NOTES :   
+ *
+ * NOTES :
  *F*/
 Arena::Arena(void) {
   rot      = 0;
@@ -201,8 +195,8 @@ Arena::Arena(void) {
 
 /*F***********************************************************
  * DESTRUCTOR
- * 
- * NOTES :   
+ *
+ * NOTES :
  *F*/
 Arena::~Arena(void) {
   delete[] this;
@@ -210,13 +204,13 @@ Arena::~Arena(void) {
 
 /*F***********************************************************
  * update(void)
- * 
+ *
  * PURPOSE : checks all possible events that could of occured
  *           in the arena
  *
  * RETURN :  void
  *
- * NOTES :   
+ * NOTES :
  *F*/
 void Arena::update(void) {
 

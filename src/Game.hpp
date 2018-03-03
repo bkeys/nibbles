@@ -38,5 +38,6 @@ class Game {
   SDL_Renderer* displayRenderer;
   SDL_Window* displayWindow;
   SDL_RendererInfo displayRendererInfo;
+  SDL_GLContext maincontext;
 };
 
