@@ -1,0 +1,16 @@
+ExternalProject_Add(freeglut
+  DOWNLOAD_NO_PROGRESS 1
+  URL https://github.com/LuaDist/freeglut/archive/master.zip
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/freeglut
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_BINARY_DIR}/freeglut  -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER} -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+)
+
+set(FREEGLUT_INCLUDE_DIR "${CMAKE_BINARY_DIR}/freeglut/include")
+set(FREEGLUT_LIBRARY "${CMAKE_BINARY_DIR}/freeglut/lib/libfreeglut.so")
+
+include_directories(SYSTEM ${FREEGLUT_INCLUDE_DIR})
+
+set(GAME_DEPENDENCY_LIBRARIES
+    ${GAME_DEPENDENCY_LIBRARIES}
+    ${FREEGLUT_LIBRARY}
+    )
